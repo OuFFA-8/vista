@@ -1,0 +1,33 @@
+.text-orientation-mixed {
+  text-orientation: mixed;
+}
+/* home.component.css */
+
+/* هذا الكلاس يطبق على البطاقة عندما تكون نشطة */
+.active-service {
+  @apply bg-vsta-teal text-vsta-dark-blue;
+}
+
+/* الأيقونة والنص يتغير لونهم أيضًا عند تفعيل البطاقة */
+.active-service i,
+.active-service span {
+  @apply text-vsta-dark-blue;
+}
+
+/* الخط الصغير يتغير لونه */
+.active-service .w-16 {
+  @apply bg-vsta-dark-blue;
+}
+
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
