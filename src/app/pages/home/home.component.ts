@@ -33,7 +33,7 @@ export class HomeComponent {
   }
 
   @ViewChild('clientsScroller') clientsScroller!: ElementRef;
-  
+
   selectedService = signal<Service | null>(null);
   currentProjectIndex = signal(0);
   isAnimating = signal(false);
@@ -45,7 +45,7 @@ export class HomeComponent {
     if (!service?.portfolio?.length) return null;
     return service.portfolio[this.currentProjectIndex()];
   });
-  
+
   hasMultipleProjects = computed(() => {
     const portfolio = this.selectedService()?.portfolio;
     return portfolio ? portfolio.length > 1 : false;
@@ -55,8 +55,8 @@ export class HomeComponent {
     {
       title: 'تصاميم جرافيك', linkText: 'اضغط للمعاينة',
       portfolio: [
-        { images: [ '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png', '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png', '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png', '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png', '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png', '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png', '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png' ], details: { partner: 'شركة مراكيز', client: 'تربس', type: 'إعلانات سوشيال ميديا' } },
-        { images: [ '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png', '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png', '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png', '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png', '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png', '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png', '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png' ], details: { partner: 'شركة ألفا', client: 'نمو', type: 'تصميم هوية بصرية' } }
+        { images: ['/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png', '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png', '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png', '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png', '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png', '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png', '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png'], details: { partner: 'شركة مراكيز', client: 'تربس', type: 'إعلانات سوشيال ميديا' } },
+        { images: ['/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png', '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png', '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png', '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png', '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png', '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png', '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png'], details: { partner: 'شركة ألفا', client: 'نمو', type: 'تصميم هوية بصرية' } }
       ]
     },
     { title: 'ويب سايت', linkText: 'اضغط للمعاينة' },
@@ -65,30 +65,30 @@ export class HomeComponent {
   ];
 
   clients = [
-    { src: '/images/عملائنا/1.png', alt: 'Al Majdouie Logo' },
-    { src: '/images/عملائنا/2.png', alt: 'Kabi Logo' },
-    { src: '/images/عملائنا/3.png', alt: 'Al Majdouie Logo' },
-    { src: '/images/عملائنا/4.png', alt: 'Kabi Logo' },
-    { src: '/images/عملائنا/5.png', alt: 'Al Majdouie Logo' },
-    { src: '/images/عملائنا/6.png', alt: 'Kabi Logo' },
-    { src: '/images/عملائنا/7.png', alt: 'Al Majdouie Logo' },
-    { src: '/images/عملائنا/8.png', alt: 'Kabi Logo' },
-    { src: '/images/عملائنا/9.png', alt: 'Kabi Logo' },
-    { src: '/images/عملائنا/10.png', alt: 'Kabi Logo' },
-    { src: '/images/عملائنا/11.png', alt: 'Kabi Logo' },
-    { src: '/images/عملائنا/12.png', alt: 'Osool Logo' },
-    { src: '/images/عملائنا/1.png', alt: 'Al Majdouie Logo' },
-    { src: '/images/عملائنا/2.png', alt: 'Kabi Logo' },
-    { src: '/images/عملائنا/3.png', alt: 'Al Majdouie Logo' },
-    { src: '/images/عملائنا/4.png', alt: 'Kabi Logo' },
-    { src: '/images/عملائنا/5.png', alt: 'Al Majdouie Logo' },
-    { src: '/images/عملائنا/6.png', alt: 'Kabi Logo' },
-    { src: '/images/عملائنا/7.png', alt: 'Al Majdouie Logo' },
-    { src: '/images/عملائنا/8.png', alt: 'Kabi Logo' },
-    { src: '/images/عملائنا/9.png', alt: 'Kabi Logo' },
-    { src: '/images/عملائنا/10.png', alt: 'Kabi Logo' },
-    { src: '/images/عملائنا/11.png', alt: 'Kabi Logo' },
-    { src: '/images/عملائنا/12.png', alt: 'Osool Logo' },
+    { src: '/images/عملائنا/1.png', alt: '' },
+    { src: '/images/عملائنا/2.png', alt: '' },
+    { src: '/images/عملائنا/3.png', alt: '' },
+    { src: '/images/عملائنا/4.png', alt: '' },
+    { src: '/images/عملائنا/5.png', alt: '' },
+    { src: '/images/عملائنا/6.png', alt: '' },
+    { src: '/images/عملائنا/7.png', alt: '' },
+    { src: '/images/عملائنا/8.png', alt: '' },
+    { src: '/images/عملائنا/9.png', alt: '' },
+    { src: '/images/عملائنا/10.png', alt: '' },
+    { src: '/images/عملائنا/11.png', alt: '' },
+    { src: '/images/عملائنا/12.png', alt: '' },
+    { src: '/images/عملائنا/1.png', alt: '' },
+    { src: '/images/عملائنا/2.png', alt: '' },
+    { src: '/images/عملائنا/3.png', alt: '' },
+    { src: '/images/عملائنا/4.png', alt: '' },
+    { src: '/images/عملائنا/5.png', alt: '' },
+    { src: '/images/عملائنا/6.png', alt: '' },
+    { src: '/images/عملائنا/7.png', alt: '' },
+    { src: '/images/عملائنا/8.png', alt: '' },
+    { src: '/images/عملائنا/9.png', alt: '' },
+    { src: '/images/عملائنا/10.png', alt: '' },
+    { src: '/images/عملائنا/11.png', alt: '' },
+    { src: '/images/عملائنا/12.png', alt: '' },
   ];
 
   toggleService(service: Service): void {
@@ -125,25 +125,25 @@ export class HomeComponent {
 
   scrollRight(): void { this.clientsScroller.nativeElement.scrollBy({ left: 300, behavior: 'smooth' }); }
   scrollLeft(): void { this.clientsScroller.nativeElement.scrollBy({ left: -300, behavior: 'smooth' }); }
-  
+
   // 4. دالة الدخول الآن تعتمد على الـ signal الجديد
   private animatePortfolioIn(): void {
     const container = document.querySelector('.portfolio-container');
     if (!container) return;
-    
+
     const direction = this.lastAnimationDirection();
     let startX = 0;
     // إذا كانت الحركة "للتالي"، ابدأ من اليمين
     if (direction === 'next') startX = 100;
     // إذا كانت الحركة "للسابق"، ابدأ من اليسار
     else if (direction === 'prev') startX = -100;
-    
-    gsap.fromTo(container, 
+
+    gsap.fromTo(container,
       { xPercent: startX, autoAlpha: 0 },
-      { 
-        duration: 0.7, 
-        xPercent: 0, 
-        autoAlpha: 1, 
+      {
+        duration: 0.7,
+        xPercent: 0,
+        autoAlpha: 1,
         ease: 'power2.out',
         onComplete: () => this.isAnimating.set(false)
       }
@@ -159,7 +159,7 @@ export class HomeComponent {
       }
       this.isAnimating.set(true);
       const xPercent = direction === 'left' ? -100 : 100;
-      
+
       gsap.to(container, {
         duration: 0.5,
         xPercent: xPercent,

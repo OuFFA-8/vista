@@ -19,8 +19,6 @@
   @apply bg-vsta-dark-blue;
 }
 
-
-
 @keyframes fadeIn {
   from {
     opacity: 0;
