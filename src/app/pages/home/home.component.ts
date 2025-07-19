@@ -2,15 +2,20 @@ import { Component, ElementRef, ViewChild, signal, computed, effect, PLATFORM_ID
 import { isPlatformBrowser } from '@angular/common';
 import { gsap } from 'gsap';
 
-// --- Interfaces ---
 interface Project {
-  images: string[];
+  media: MediaItem[];
   details: { partner: string; client: string; type: string; };
 }
+
 interface Service {
   title: string;
   linkText: string;
   portfolio?: Project[];
+}
+
+interface MediaItem {
+  type: 'image' | 'video';
+  src: string;
 }
 
 @Component({
@@ -37,7 +42,6 @@ export class HomeComponent {
   selectedService = signal<Service | null>(null);
   currentProjectIndex = signal(0);
   isAnimating = signal(false);
-  // 1. تمت إضافة هذا الـ signal لتخزين اتجاه الحركة
   lastAnimationDirection = signal<'next' | 'prev' | 'none'>('none');
 
   currentProject = computed(() => {
@@ -53,15 +57,83 @@ export class HomeComponent {
 
   services: Service[] = [
     {
-      title: 'تصاميم جرافيك', linkText: 'اضغط للمعاينة',
+      title: 'تصاميم جرافيك',
+      linkText: 'اضغط للمعاينة',
       portfolio: [
-        { images: ['/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png', '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png', '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png', '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png', '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png', '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png', '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png'], details: { partner: 'شركة مراكيز', client: 'تربس', type: 'إعلانات سوشيال ميديا' } },
-        { images: ['/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png', '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png', '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png', '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png', '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png', '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png', '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png'], details: { partner: 'شركة ألفا', client: 'نمو', type: 'تصميم هوية بصرية' } }
+        {
+          // 1. تم تحويل "images" إلى "media" مع تحديد النوع "image"
+          media: [
+            { type: 'image', src: '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png' },
+            { type: 'image', src: '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png' },
+            { type: 'image', src: '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png' },
+            { type: 'image', src: '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png' },
+            { type: 'image', src: '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png' },
+            { type: 'image', src: '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png' },
+            { type: 'image', src: '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png' }
+          ],
+          details: { partner: 'شركة مراكيز', client: 'تربس', type: 'إعلانات سوشيال ميديا' }
+        },
+        {
+          media: [
+            { type: 'image', src: '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png' },
+            { type: 'image', src: '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png' },
+            { type: 'image', src: '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png' },
+            { type: 'image', src: '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png' },
+            { type: 'image', src: '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png' },
+            { type: 'image', src: '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png' },
+            { type: 'image', src: '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png' }
+          ],
+          details: { partner: 'شركة ألفا', client: 'نمو', type: 'تصميم هوية بصرية' }
+        }
       ]
     },
-    { title: 'ويب سايت', linkText: 'اضغط للمعاينة' },
-    { title: 'إنتاج اعلامي', linkText: 'اضغط للمعاينة' },
-    { title: 'براندق', linkText: 'اضغط للمعاينة' }
+    {
+      title: 'ويب سايت',
+      linkText: 'اضغط للمعاينة',
+      portfolio: [
+        {
+          // 2. تم تحويل "images" إلى "media" مع تحديد النوع "image"
+          media: [
+            { type: 'image', src: 'https://i.imgur.com/uCjL9fQ.png' }
+          ],
+          details: { partner: 'اسم العميل', client: 'اسم المشروع', type: 'تطوير موقع إلكتروني' }
+        },
+        {
+          media: [
+            { type: 'image', src: 'https://i.imgur.com/uCjL9fQ.png' }
+          ],
+          details: { partner: 'اسم العميل 2', client: 'اسم المشروع 2', type: 'تطوير موقع إلكتروني' }
+        }
+      ]
+    },
+    {
+      title: 'إنتاج اعلامي',
+      linkText: 'اضغط للمعاينة',
+      portfolio: [
+        {
+          media: [
+            { type: 'video', src: 'https://assets.mixkit.co/videos/preview/mixkit-waves-in-the-ocean-1164-large.mp4' },
+            { type: 'video', src: 'https://assets.mixkit.co/videos/preview/mixkit-the-spheres-of-a-trinitarian-clock-42872-large.mp4' },
+            { type: 'video', src: 'https://assets.mixkit.co/videos/preview/mixkit-mysterious-pale-hornet-moth-in-a-close-up-shot-48842-large.mp4' },
+            { type: 'video', src: 'https://assets.mixkit.co/videos/preview/mixkit-marketing-and-business-plan-34139-large.mp4' }
+          ],
+          details: { partner: 'استديو فيستا', client: 'خاص', type: 'فيديوهات ترويجية' }
+        },
+        {
+          media: [
+            { type: 'video', src: 'https://assets.mixkit.co/videos/preview/mixkit-waves-in-the-ocean-1164-large.mp4' },
+            { type: 'video', src: 'https://assets.mixkit.co/videos/preview/mixkit-the-spheres-of-a-trinitarian-clock-42872-large.mp4' },
+            { type: 'video', src: 'https://assets.mixkit.co/videos/preview/mixkit-mysterious-pale-hornet-moth-in-a-close-up-shot-48842-large.mp4' },
+            { type: 'video', src: 'https://assets.mixkit.co/videos/preview/mixkit-marketing-and-business-plan-34139-large.mp4' }
+          ],
+          details: { partner: 'استديو فيستا', client: 'خاص', type: 'فيديوهات ترويجية' }
+        },
+      ]
+    },
+    {
+      title: 'براندق',
+      linkText: 'اضغط للمعاينة'
+    }
   ];
 
   clients = [
@@ -92,7 +164,6 @@ export class HomeComponent {
   ];
 
   toggleService(service: Service): void {
-    // 2. عند فتح بورتفوليو جديد، نضبط الاتجاه إلى "none" (ظهور عادي)
     this.lastAnimationDirection.set('none');
     if (this.selectedService() === service) {
       this.selectedService.set(null);
@@ -102,12 +173,11 @@ export class HomeComponent {
     }
   }
 
-  // 3. تم تعديل دوال السلايدر لتحديد الاتجاه
   nextProject(): void {
     if (this.isAnimating()) return;
     const portfolio = this.selectedService()?.portfolio;
     if (!portfolio) return;
-    this.lastAnimationDirection.set('next'); // نحدد أن الحركة "للتالي"
+    this.lastAnimationDirection.set('next');
     this.animatePortfolioOut('left').then(() => {
       this.currentProjectIndex.update(index => (index + 1) % portfolio.length);
     });
@@ -117,7 +187,7 @@ export class HomeComponent {
     if (this.isAnimating()) return;
     const portfolio = this.selectedService()?.portfolio;
     if (!portfolio) return;
-    this.lastAnimationDirection.set('prev'); // نحدد أن الحركة "للسابق"
+    this.lastAnimationDirection.set('prev'); 
     this.animatePortfolioOut('right').then(() => {
       this.currentProjectIndex.update(index => (index - 1 + portfolio.length) % portfolio.length);
     });
@@ -126,16 +196,13 @@ export class HomeComponent {
   scrollRight(): void { this.clientsScroller.nativeElement.scrollBy({ left: 300, behavior: 'smooth' }); }
   scrollLeft(): void { this.clientsScroller.nativeElement.scrollBy({ left: -300, behavior: 'smooth' }); }
 
-  // 4. دالة الدخول الآن تعتمد على الـ signal الجديد
   private animatePortfolioIn(): void {
     const container = document.querySelector('.portfolio-container');
     if (!container) return;
 
     const direction = this.lastAnimationDirection();
     let startX = 0;
-    // إذا كانت الحركة "للتالي"، ابدأ من اليمين
     if (direction === 'next') startX = 100;
-    // إذا كانت الحركة "للسابق"، ابدأ من اليسار
     else if (direction === 'prev') startX = -100;
 
     gsap.fromTo(container,
@@ -150,7 +217,6 @@ export class HomeComponent {
     );
   }
 
-  // دالة الخروج تبقى كما هي
   private animatePortfolioOut(direction: 'left' | 'right'): Promise<void> {
     return new Promise(resolve => {
       const container = document.querySelector('.portfolio-container');

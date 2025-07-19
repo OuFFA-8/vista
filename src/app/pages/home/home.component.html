@@ -64,8 +64,8 @@
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 -mt-24">
 
         @for (service of services.slice().reverse(); track service) {
-        <!-- 1. حولنا الـ div إلى button، وأضفنا click event و class ديناميكي -->
         <button (click)="toggleService(service)" [class.active-service]="selectedService() === service"
+          [disabled]="!service.portfolio || service.portfolio.length === 0"
           class="group relative text-white rounded-3xl p-8 flex flex-col justify-center items-center text-center transform hover:-translate-y-2 transition-all duration-300 shadow-2xl min-h-[280px] bg-vsta-dark-blue disabled:opacity-50 disabled:cursor-not-allowed">
 
           <i
@@ -81,10 +81,10 @@
       </div>
 
       <!-- ============================================= -->
-      <!-- ===== START: Portfolio Display Section (Asymmetric Layout) ===== -->
+      <!-- ===== START: Portfolio Display Section (Handles Images & Videos) ===== -->
       <!-- ============================================= -->
       @if (selectedService(); as service) {
-      <div class="relative mt-12 px-12 md:px-16  mx-auto">
+      <div class="relative mt-12 px-12 md:px-16 mx-auto">
 
         @if (hasMultipleProjects()) {
         <button (click)="prevProject()"
@@ -100,33 +100,63 @@
         <div class="overflow-hidden">
           <div class="p-3 bg-white rounded-3xl shadow-xl portfolio-container">
             @if(currentProject(); as project) {
-            <!-- 1. الشبكة الرئيسية الجديدة: 3 أعمدة على الشاشات الكبيرة -->
-            <div class="grid grid-cols-1 lg:grid-cols-6 gap-2">
 
-              <!-- 2. الصورة الرئيسية على اليمين (تأخذ عمودين) -->
+            <!-- ============================================= -->
+            <!-- START: التعديل الرئيسي هنا -->
+            <!-- ============================================= -->
+
+            <!-- 1. التحقق من نوع المحتوى أولاً -->
+            @if (project.media[0].type === 'video') {
+
+            <!-- تصميم شبكة الفيديوهات (الجديد) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+              @for (item of project.media; track item) {
+              <div class="rounded-lg overflow-hidden aspect-video">
+                <video [src]="item.src" class="w-full h-full object-cover" controls muted loop autoplay
+                  playsinline></video>
+              </div>
+              }
+            </div>
+
+            } @else if (project.media.length > 1) {
+
+            <!-- تصميم الصور المتعددة (الكود الخاص بك مع تعديل media.src) -->
+            <div class="grid grid-cols-1 lg:grid-cols-6 gap-2">
               <div class="lg:col-span-3 lg:order-last main-image-container">
-                <div class="rounded-lg overflow-hidden md:h-[564px] 2xl:h-[700px]">
-                  <img [src]="project.images[0]" alt="Main project image" class="w-full h-full object-cover">
+                <div class="rounded-lg overflow-hidden md:h-[564px] 2xl:h-[703px]">
+                  <!-- تم التغيير إلى project.media[0].src -->
+                  <img [src]="project.media[0].src" alt="Main project image" class="w-full h-full object-cover">
                 </div>
               </div>
-
-              <!-- 3. الصور المصغرة على اليسار (تأخذ عمودًا واحدًا) -->
               <div class="lg:col-span-3 thumbnails-grid">
                 <div class="grid grid-cols-2 lg:grid-cols-3 gap-2">
-                  <!-- نستخدم slice(1) لتجاوز الصورة الأولى التي عرضناها بالفعل -->
-                  @for (image of project.images.slice(1); track image) {
-                  <div class="rounded-lg overflow-hidden ">
-                    <img [src]="image" alt="Project thumbnail"
+                  <!-- تم التغيير إلى project.media.slice(1) -->
+                  @for (item of project.media.slice(1); track item) {
+                  <div class="rounded-lg overflow-hidden">
+                    <!-- تم التغيير إلى item.src -->
+                    <img [src]="item.src" alt="Project thumbnail"
                       class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
                   </div>
                   }
                 </div>
               </div>
-
             </div>
+
+            } @else {
+
+            <!-- تصميم الصورة الواحدة (مع تعديل media.src) -->
+            <div class="rounded-lg overflow-hidden">
+              <!-- تم التغيير إلى project.media[0].src -->
+              <img [src]="project.media[0].src" alt="Single project image" class="w-full h-auto object-contain">
+            </div>
+
+            }
+            <!-- ============================================= -->
+            <!-- END: نهاية التعديل -->
+            <!-- ============================================= -->
             }
 
-            <!-- Details Bar -->
+            <!-- Details Bar (يبقى كما هو) -->
             <div class="mt-8 pt-6 border-t border-gray-200 grid grid-cols-3 text-center">
               @if(currentProject(); as project) {
               <div class="px-4">
@@ -149,6 +179,7 @@
       </div>
       }
       <!-- ===== END: Portfolio Display Section ===== -->
+
     </div>
   </section>
 
@@ -158,7 +189,7 @@
   <section class="bg-gray-100 py-20 text-vsta-dark-blue">
     <div class="container mx-auto px-6 lg:px-8">
 
-      <h2 class="text-4xl font-bold text-center mb-12">عملنا معهم</h2>
+      <h2 class="text-4xl font-bold text-end mb-12">عملنا معهم</h2>
 
       <!-- حاوية السلايدر -->
       <div class="relative bg-white rounded-full shadow-lg p-4 flex items-center">
@@ -173,10 +204,10 @@
 
         <!-- المنطقة القابلة للتمرير (Scroller) -->
         <div #clientsScroller class="flex-grow overflow-x-auto mx-4 scrollbar-hide no-scrollbar">
-          <div class="flex items-center justify-start space-x-16 whitespace-nowrap px-4">
+          <div class="flex items-center justify-start space-x-20 md:space-x-32 whitespace-nowrap px-4">
             @for (client of clients; track client) {
             <div class="inline-block">
-              <img [src]="client.src" [alt]="client.alt" class="h-12 w-auto max-w-none">
+              <img [src]="client.src" [alt]="client.alt" class="h-20 w-auto max-w-none">
             </div>
             }
           </div>
