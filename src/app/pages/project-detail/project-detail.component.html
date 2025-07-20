@@ -1,0 +1,88 @@
+@if (project(); as p) {
+<main class="font-sans">
+
+    <!-- =============================== -->
+    <!-- ===== Project Hero Section ===== -->
+    <!-- =============================== -->
+    <section class="relative bg-gradient-to-bl from-vsta-purple via-vsta-dark-blue to-vsta-teal pb-48 pt-32 text-white">
+        <!-- منحنى SVG في الأسفل -->
+        <div class="absolute bottom-0 left-0 w-full h-32 md:h-48 text-gray-100">
+            <svg viewBox="0 0 1440 320" class="w-full h-full" preserveAspectRatio="none">
+                <path fill="currentColor" fill-opacity="1"
+                    d="M0,192L80,170.7C160,149,320,107,480,112C640,117,800,171,960,197.3C1120,224,1280,224,1360,224L1440,224L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z">
+                </path>
+            </svg>
+        </div>
+
+        <!-- محتوى الـ Hero -->
+        <div class="container mx-auto px-6 lg:px-8 relative z-10">
+            <p class="text-lg text-gray-300 mb-4 text-center">إبداع، تأثير، انتشار</p>
+
+            <!-- عنوان المشروع -->
+            <h1 class="text-7xl md:text-8xl font-black text-center">
+                <!-- مثال: إذا كان العميل "براندق"، سيتم تلوين "براند" -->
+                <span class="text-vsta-teal">{{ p.details.client.slice(0, 5) }}</span>{{ p.details.client.slice(5) }}
+            </h1>
+
+            <!-- تفاصيل المشروع -->
+            <div
+                class="mt-12 flex justify-center items-center text-center space-x-8 rtl:space-x-reverse divide-x rtl:divide-x-reverse divide-gray-500">
+                <div class="px-8">
+                    <h4 class="text-gray-400 text-sm mb-1">الشريك</h4>
+                    <p class="font-bold text-lg">{{ p.details.partner }}</p>
+                </div>
+                <div class="px-8">
+                    <h4 class="text-gray-400 text-sm mb-1">العميل</h4>
+                    <p class="font-bold text-lg">{{ p.details.client }}</p>
+                </div>
+                <div class="px-8">
+                    <h4 class="text-gray-400 text-sm mb-1">النوع</h4>
+                    <p class="font-bold text-lg">{{ p.details.type }}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- =============================== -->
+    <!-- ===== Project Content Section ===== -->
+    <!-- =============================== -->
+    <section class="bg-gray-100 pb-20 -mt-32">
+        <div class="container mx-auto px-6 lg:px-8">
+            <div class="bg-vsta-dark-blue rounded-3xl p-6 md:p-10 shadow-2xl content-panel">
+
+                <!-- تصميم المعرض الجديد -->
+                @if (p.media.length > 0) {
+                <!-- 1. حاوية رئيسية لتوسيط كل شيء -->
+                <div class="max-w-5xl mx-auto flex flex-col items-center gap-4">
+
+                    <!-- 2. الصورة الرئيسية (دائمًا موجودة) -->
+                    <div class="w-full rounded-lg overflow-hidden">
+                        <img [src]="p.media[0].src" alt="Main project image for {{p.details.client}}"
+                            class="w-full h-full object-cover">
+                    </div>
+
+                    <!-- 3. عمود الصور المصغرة (يظهر فقط إذا كان هناك أكثر من صورة) -->
+                    @if (p.media.length > 1) {
+                    <div class="w-full grid grid-cols-1 gap-4">
+                        <!-- نستخدم slice(1, 4) لأخذ 3 صور فقط بعد الصورة الرئيسية -->
+                        @for (item of p.media.slice(1, 4); track item.src) {
+                        <div class="rounded-lg overflow-hidden">
+                            <img [src]="item.src" alt="Project thumbnail for {{p.details.client}}"
+                                class="w-full h-full object-cover">
+                        </div>
+                        }
+                    </div>
+                    }
+                </div>
+                }
+            </div>
+        </div>
+    </section>
+</main>
+} @else {
+<!-- رسالة في حالة عدم العثور على المشروع -->
+<div class="flex items-center justify-center h-screen">
+    <p class="text-2xl text-red-500">عذراً، لم يتم العثور على المشروع.</p>
+</div>
+}

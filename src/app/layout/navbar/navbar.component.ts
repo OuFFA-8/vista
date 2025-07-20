@@ -53,7 +53,7 @@ export class NavbarComponent implements AfterViewInit {
   // 1. تم تصحيح منطق الدالة
   private checkIsHomePage(url: string): boolean {
     // فقط الصفحة الرئيسية (/) أو (/home) هي التي يبدأ فيها الشريط شفافًا
-    return url === '/' || url === '/home';
+    return url === '/' || url === '/home' || url.startsWith('/portfolio/');
   }
   
   // 2. تم دمج onScroll و handleScroll

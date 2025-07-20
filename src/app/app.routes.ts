@@ -1,7 +1,8 @@
+import { ProjectDetailComponent } from './pages/project-detail/project-detail.component';
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
-    
+
 
     { path: '', redirectTo: 'home', pathMatch: 'full' },
 
@@ -12,22 +13,10 @@ export const routes: Routes = [
         title: 'الصفحة الرئيسية'
     },
     {
-        path: 'about',
+        path: 'portfolio/:id',
         loadComponent: () =>
-            import('./pages/about/about.component').then(m => m.AboutComponent),
-        title: 'من نحن'
-    },
-    {
-        path: 'portfolio',
-        loadComponent: () =>
-            import('./pages/portfolio/portfolio.component').then(m => m.PortfolioComponent),
-        title: 'أعمالنا'
-    },
-    {
-        path: 'contact',
-        loadComponent: () =>
-            import('./pages/contact/contact.component').then(m => m.ContactComponent),
-        title: 'تواصل معنا'
+            import('./pages/project-detail/project-detail.component').then(m => m.ProjectDetailComponent),
+        title: 'Not Found'
     },
     {
         path: '**',
@@ -35,5 +24,5 @@ export const routes: Routes = [
             import('./pages/notfound/notfound.component').then(m => m.NotfoundComponent),
         title: 'Not Found'
     },
-    
+
 ];

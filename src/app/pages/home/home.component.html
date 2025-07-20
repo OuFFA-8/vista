@@ -81,7 +81,7 @@
       </div>
 
       <!-- ============================================= -->
-      <!-- ===== START: Portfolio Display Section (Handles Images & Videos) ===== -->
+      <!-- ===== START: Portfolio Display Section (Unified Grid Layout) ===== -->
       <!-- ============================================= -->
       @if (selectedService(); as service) {
       <div class="relative mt-12 px-12 md:px-16 mx-auto">
@@ -101,14 +101,8 @@
           <div class="p-3 bg-white rounded-3xl shadow-xl portfolio-container">
             @if(currentProject(); as project) {
 
-            <!-- ============================================= -->
-            <!-- START: التعديل الرئيسي هنا -->
-            <!-- ============================================= -->
-
-            <!-- 1. التحقق من نوع المحتوى أولاً -->
             @if (project.media[0].type === 'video') {
-
-            <!-- تصميم شبكة الفيديوهات (الجديد) -->
+            <!-- 1. تصميم الفيديوهات يبقى كما هو (يعرض كل الفيديوهات) -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
               @for (item of project.media; track item) {
               <div class="rounded-lg overflow-hidden aspect-video">
@@ -118,22 +112,33 @@
               }
             </div>
 
+            }
+            @else if (project.layout === 'grid') {
+            <!-- ============================================= -->
+            <!-- ===== هذا هو التعديل الوحيد الذي تم ===== -->
+            <!-- ============================================= -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+              <!-- نقوم بالحلقة على كل المشاريع في الخدمة -->
+              @for (p of service.portfolio; track p.id) {
+              <a [routerLink]="['/portfolio', p.id]" class="block rounded-lg overflow-hidden aspect-video group/image">
+                <!-- نعرض الصورة الرئيسية coverImage -->
+                <img [src]="p.coverImage" alt="Cover for {{ p.details.client }}"
+                  class="w-full h-full object-cover transition-transform duration-300 group-hover/image:scale-105">
+              </a>
+              }
+            </div>
             } @else if (project.media.length > 1) {
 
-            <!-- تصميم الصور المتعددة (الكود الخاص بك مع تعديل media.src) -->
             <div class="grid grid-cols-1 lg:grid-cols-6 gap-2">
               <div class="lg:col-span-3 lg:order-last main-image-container">
                 <div class="rounded-lg overflow-hidden md:h-[564px] 2xl:h-[703px]">
-                  <!-- تم التغيير إلى project.media[0].src -->
                   <img [src]="project.media[0].src" alt="Main project image" class="w-full h-full object-cover">
                 </div>
               </div>
               <div class="lg:col-span-3 thumbnails-grid">
                 <div class="grid grid-cols-2 lg:grid-cols-3 gap-2">
-                  <!-- تم التغيير إلى project.media.slice(1) -->
                   @for (item of project.media.slice(1); track item) {
                   <div class="rounded-lg overflow-hidden">
-                    <!-- تم التغيير إلى item.src -->
                     <img [src]="item.src" alt="Project thumbnail"
                       class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
                   </div>
@@ -143,17 +148,12 @@
             </div>
 
             } @else {
-
-            <!-- تصميم الصورة الواحدة (مع تعديل media.src) -->
+            <!-- 3. تصميم الصورة الواحدة -->
             <div class="rounded-lg overflow-hidden">
-              <!-- تم التغيير إلى project.media[0].src -->
               <img [src]="project.media[0].src" alt="Single project image" class="w-full h-auto object-contain">
             </div>
-
             }
-            <!-- ============================================= -->
-            <!-- END: نهاية التعديل -->
-            <!-- ============================================= -->
+
             }
 
             <!-- Details Bar (يبقى كما هو) -->

@@ -1,31 +1,22 @@
-import { Component, ElementRef, ViewChild, signal, computed, effect, PLATFORM_ID, Inject } from '@angular/core';
+import { Component, ElementRef, ViewChild, signal, computed, effect, PLATFORM_ID, Inject, inject, OnInit } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { gsap } from 'gsap';
 
-interface Project {
-  media: MediaItem[];
-  details: { partner: string; client: string; type: string; };
-}
-
-interface Service {
-  title: string;
-  linkText: string;
-  portfolio?: Project[];
-}
-
-interface MediaItem {
-  type: 'image' | 'video';
-  src: string;
-}
+// 1. استيراد الواجهات والخدمة من مكانها المركزي
+import { PortfolioService, Service, Project } from './../../core/services/portfolio/portfolio.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
+
+  // 2. حقن الخدمة باستخدام inject (الطريقة الحديثة)
+  private portfolioService = inject(PortfolioService);
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {
     effect(() => {
@@ -37,7 +28,17 @@ export class HomeComponent {
     });
   }
 
+  // 3. استخدام OnInit لجلب البيانات عند بدء تشغيل الكومبوننت
+  ngOnInit(): void {
+    // جلب البيانات من الخدمة وتعيينها للمتغير المحلي
+    this.services = this.portfolioService.getServices();
+  }
+
+  // --- الخصائص والـ Signals ---
   @ViewChild('clientsScroller') clientsScroller!: ElementRef;
+
+  // 4. مصفوفة services الآن تبدأ فارغة وسيتم ملؤها من الخدمة
+  services: Service[] = [];
 
   selectedService = signal<Service | null>(null);
   currentProjectIndex = signal(0);
@@ -52,116 +53,22 @@ export class HomeComponent {
 
   hasMultipleProjects = computed(() => {
     const portfolio = this.selectedService()?.portfolio;
+    // إذا كان التصميم شبكيًا، فلا تظهر الأسهم
+    if (portfolio && portfolio.length > 0 && portfolio[0].layout === 'grid') {
+      return false;
+    }
     return portfolio ? portfolio.length > 1 : false;
   });
 
-  services: Service[] = [
-    {
-      title: 'تصاميم جرافيك',
-      linkText: 'اضغط للمعاينة',
-      portfolio: [
-        {
-          // 1. تم تحويل "images" إلى "media" مع تحديد النوع "image"
-          media: [
-            { type: 'image', src: '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png' },
-            { type: 'image', src: '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png' },
-            { type: 'image', src: '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png' },
-            { type: 'image', src: '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png' },
-            { type: 'image', src: '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png' },
-            { type: 'image', src: '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png' },
-            { type: 'image', src: '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png' }
-          ],
-          details: { partner: 'شركة مراكيز', client: 'تربس', type: 'إعلانات سوشيال ميديا' }
-        },
-        {
-          media: [
-            { type: 'image', src: '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png' },
-            { type: 'image', src: '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png' },
-            { type: 'image', src: '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png' },
-            { type: 'image', src: '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png' },
-            { type: 'image', src: '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png' },
-            { type: 'image', src: '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png' },
-            { type: 'image', src: '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png' }
-          ],
-          details: { partner: 'شركة ألفا', client: 'نمو', type: 'تصميم هوية بصرية' }
-        }
-      ]
-    },
-    {
-      title: 'ويب سايت',
-      linkText: 'اضغط للمعاينة',
-      portfolio: [
-        {
-          // 2. تم تحويل "images" إلى "media" مع تحديد النوع "image"
-          media: [
-            { type: 'image', src: 'https://i.imgur.com/uCjL9fQ.png' }
-          ],
-          details: { partner: 'اسم العميل', client: 'اسم المشروع', type: 'تطوير موقع إلكتروني' }
-        },
-        {
-          media: [
-            { type: 'image', src: 'https://i.imgur.com/uCjL9fQ.png' }
-          ],
-          details: { partner: 'اسم العميل 2', client: 'اسم المشروع 2', type: 'تطوير موقع إلكتروني' }
-        }
-      ]
-    },
-    {
-      title: 'إنتاج اعلامي',
-      linkText: 'اضغط للمعاينة',
-      portfolio: [
-        {
-          media: [
-            { type: 'video', src: 'https://assets.mixkit.co/videos/preview/mixkit-waves-in-the-ocean-1164-large.mp4' },
-            { type: 'video', src: 'https://assets.mixkit.co/videos/preview/mixkit-the-spheres-of-a-trinitarian-clock-42872-large.mp4' },
-            { type: 'video', src: 'https://assets.mixkit.co/videos/preview/mixkit-mysterious-pale-hornet-moth-in-a-close-up-shot-48842-large.mp4' },
-            { type: 'video', src: 'https://assets.mixkit.co/videos/preview/mixkit-marketing-and-business-plan-34139-large.mp4' }
-          ],
-          details: { partner: 'استديو فيستا', client: 'خاص', type: 'فيديوهات ترويجية' }
-        },
-        {
-          media: [
-            { type: 'video', src: 'https://assets.mixkit.co/videos/preview/mixkit-waves-in-the-ocean-1164-large.mp4' },
-            { type: 'video', src: 'https://assets.mixkit.co/videos/preview/mixkit-the-spheres-of-a-trinitarian-clock-42872-large.mp4' },
-            { type: 'video', src: 'https://assets.mixkit.co/videos/preview/mixkit-mysterious-pale-hornet-moth-in-a-close-up-shot-48842-large.mp4' },
-            { type: 'video', src: 'https://assets.mixkit.co/videos/preview/mixkit-marketing-and-business-plan-34139-large.mp4' }
-          ],
-          details: { partner: 'استديو فيستا', client: 'خاص', type: 'فيديوهات ترويجية' }
-        },
-      ]
-    },
-    {
-      title: 'براندق',
-      linkText: 'اضغط للمعاينة'
-    }
+  clients = [
+    { src: '/images/عملائنا/1.png', alt: '' }, { src: '/images/عملائنا/2.png', alt: '' },
+    { src: '/images/عملائنا/3.png', alt: '' }, { src: '/images/عملائنا/4.png', alt: '' },
+    { src: '/images/عملائنا/5.png', alt: '' }, { src: '/images/عملائنا/6.png', alt: '' },
+    { src: '/images/عملائنا/7.png', alt: '' }, { src: '/images/عملائنا/8.png', alt: '' },
+    { src: '/images/عملائنا/9.png', alt: '' }, { src: '/images/عملائنا/10.png', alt: '' },
+    { src: '/images/عملائنا/11.png', alt: '' }, { src: '/images/عملائنا/12.png', alt: '' },
   ];
 
-  clients = [
-    { src: '/images/عملائنا/1.png', alt: '' },
-    { src: '/images/عملائنا/2.png', alt: '' },
-    { src: '/images/عملائنا/3.png', alt: '' },
-    { src: '/images/عملائنا/4.png', alt: '' },
-    { src: '/images/عملائنا/5.png', alt: '' },
-    { src: '/images/عملائنا/6.png', alt: '' },
-    { src: '/images/عملائنا/7.png', alt: '' },
-    { src: '/images/عملائنا/8.png', alt: '' },
-    { src: '/images/عملائنا/9.png', alt: '' },
-    { src: '/images/عملائنا/10.png', alt: '' },
-    { src: '/images/عملائنا/11.png', alt: '' },
-    { src: '/images/عملائنا/12.png', alt: '' },
-    { src: '/images/عملائنا/1.png', alt: '' },
-    { src: '/images/عملائنا/2.png', alt: '' },
-    { src: '/images/عملائنا/3.png', alt: '' },
-    { src: '/images/عملائنا/4.png', alt: '' },
-    { src: '/images/عملائنا/5.png', alt: '' },
-    { src: '/images/عملائنا/6.png', alt: '' },
-    { src: '/images/عملائنا/7.png', alt: '' },
-    { src: '/images/عملائنا/8.png', alt: '' },
-    { src: '/images/عملائنا/9.png', alt: '' },
-    { src: '/images/عملائنا/10.png', alt: '' },
-    { src: '/images/عملائنا/11.png', alt: '' },
-    { src: '/images/عملائنا/12.png', alt: '' },
-  ];
 
   toggleService(service: Service): void {
     this.lastAnimationDirection.set('none');
@@ -187,7 +94,7 @@ export class HomeComponent {
     if (this.isAnimating()) return;
     const portfolio = this.selectedService()?.portfolio;
     if (!portfolio) return;
-    this.lastAnimationDirection.set('prev'); 
+    this.lastAnimationDirection.set('prev');
     this.animatePortfolioOut('right').then(() => {
       this.currentProjectIndex.update(index => (index - 1 + portfolio.length) % portfolio.length);
     });
