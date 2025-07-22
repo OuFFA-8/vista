@@ -6,7 +6,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Cairo', 'sans-serif'],
+        sans: ['GE SS Two', 'Cairo', 'sans-serif'],
       },
       colors: {
         'vsta-dark-blue': '#0D0D1F',
@@ -17,7 +17,7 @@ module.exports = {
   },
   plugins: [
     require('flowbite/plugin'),
-    require('tailwind-scrollbar-hide') 
+    require('tailwind-scrollbar-hide')
   ],
 }
 

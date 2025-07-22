@@ -1,6 +1,41 @@
+@font-face {
+  font-family: 'GE SS Two';
+  src: url('/fonts/ArbFONTS-GE_SS_Two_Light.otf') format('opentype');
+  font-weight: 300; /* Light */
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'GE SS Two';
+  src: url('/fonts/ArbFONTS-GE_SS_Two_Medium.otf') format('opentype');
+  font-weight: 500; /* Medium */
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'GE SS Two';
+  src: url('/fonts/ArbFONTS-GE_SS_Two_Bold.otf') format('opentype');
+  font-weight: 700; /* Bold */
+  font-style: normal;
+  font-display: swap;
+}
+
+
+/* ============================================= */
+/* ===== 2. استيراد Tailwind (Tailwind Directives) ===== */
+/* ============================================= */
 @tailwind base;
 @tailwind components;
-@tailwind utilities;/* You can add global styles to this file, and also import other style files */
+@tailwind utilities;
+
+
+/* ============================================= */
+/* ===== 3. الكلاسات المخصصة (Custom Utilities) ===== */
+/* ============================================= */
+
+/* Hide scrollbar for Chrome, Safari and Opera */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
