@@ -5,7 +5,7 @@ import { PortfolioService, Project } from '../../core/services/portfolio/portfol
 @Component({
   selector: 'app-project-detail',
   standalone: true,
-  imports: [RouterLink], 
+  imports: [], 
   templateUrl: './project-detail.component.html',
   styleUrl: './project-detail.component.css'
 })

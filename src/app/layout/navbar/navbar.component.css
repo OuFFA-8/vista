@@ -1,3 +1,12 @@
-a.active-link {
+ul a.active-link {
   @apply font-bold text-vsta-teal border-b-2 border-vsta-teal;
+}
+
+/* 
+  لضمان أن الروابط في الموبايل ترث اللون الأبيض أيضًا بشكل صحيح
+*/
+@media (max-width: 768px) {
+  ul a {
+    @apply text-white;
+  }
 }

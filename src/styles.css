@@ -1,7 +1,8 @@
 @font-face {
   font-family: 'GE SS Two';
   src: url('/fonts/ArbFONTS-GE_SS_Two_Light.otf') format('opentype');
-  font-weight: 300; /* Light */
+  font-weight: 300;
+  /* Light */
   font-style: normal;
   font-display: swap;
 }
@@ -9,7 +10,8 @@
 @font-face {
   font-family: 'GE SS Two';
   src: url('/fonts/ArbFONTS-GE_SS_Two_Medium.otf') format('opentype');
-  font-weight: 500; /* Medium */
+  font-weight: 500;
+  /* Medium */
   font-style: normal;
   font-display: swap;
 }
@@ -17,7 +19,8 @@
 @font-face {
   font-family: 'GE SS Two';
   src: url('/fonts/ArbFONTS-GE_SS_Two_Bold.otf') format('opentype');
-  font-weight: 700; /* Bold */
+  font-weight: 700;
+  /* Bold */
   font-style: normal;
   font-display: swap;
 }
@@ -42,6 +45,19 @@
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .no-scrollbar {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+#services,
+#clients,
+#contact,
+#about-us {
+  scroll-margin-top: 6rem;
 }

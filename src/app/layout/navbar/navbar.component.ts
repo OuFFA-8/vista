@@ -1,8 +1,9 @@
-import { Component, HostListener, inject, signal, computed, DestroyRef, PLATFORM_ID, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, HostListener, inject, signal, computed, DestroyRef, PLATFORM_ID, ViewChild, ElementRef, AfterViewInit, effect } from '@angular/core';
 import { isPlatformBrowser, CommonModule } from '@angular/common';
 import { Router, RouterLink, RouterLinkActive, NavigationEnd } from '@angular/router';
 import { filter, map } from 'rxjs/operators';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ScrollSpyService } from '../../core/services/scroll-spy/scroll-spy.service';
 
 @Component({
   selector: 'app-navbar',
@@ -10,7 +11,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   imports: [
     CommonModule,
     RouterLink,
-    RouterLinkActive
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
@@ -19,6 +19,7 @@ export class NavbarComponent implements AfterViewInit {
 
   @ViewChild('mobileMenuButton') mobileMenuButton!: ElementRef<HTMLButtonElement>;
   @ViewChild('mobileMenu') mobileMenu!: ElementRef<HTMLDivElement>;
+  private scrollSpyService = inject(ScrollSpyService);
 
   private readonly router = inject(Router);
   private readonly destroyRef = inject(DestroyRef);
@@ -27,11 +28,15 @@ export class NavbarComponent implements AfterViewInit {
   // Signals لحالة الشريط
   private readonly isScrolled = signal(false);
   private readonly isHomePage = signal(this.checkIsHomePage(this.router.url));
+  activeSectionId = this.scrollSpyService.activeSectionId;
 
   // Computed signal: سيقوم بإظهار الخلفية إذا لم نكن في الصفحة الرئيسية، أو إذا قمنا بالتمرير لأسفل
   readonly showBackground = computed(() => !this.isHomePage() || this.isScrolled());
 
   constructor() {
+    effect(() => {
+      console.log('Navbar received active section ID:', this.activeSectionId());
+    });
     // مراقبة تغييرات المسار لتحديث حالة isHomePage
     this.router.events.pipe(
       filter((event): event is NavigationEnd => event instanceof NavigationEnd),
