@@ -30,54 +30,53 @@
 
 <router-outlet></router-outlet>
 
-  <!-- =============================== -->
-  <!-- ===== Contact Section (Arabic Layout) ===== -->
-  <!-- =============================== -->
-  <section #scrollSection id="contact" class="relative w-full bg-cover bg-center py-20"
-    style="background-image: url('/images/معرض كاش اكسبو/تهنئة رمضان كاش اكسبو.png');">
+<!-- =============================== -->
+<!-- ===== Contact Section (Gradient Background) ===== -->
+<!-- =============================== -->
+<section #scrollSection id="contact" class="relative w-full py-20">
 
-    <div class="absolute inset-0 bg-vsta-dark-blue/80"></div>
+  <!-- 2. تم استبدال طبقة التغميق بطبقة التدرج اللوني -->
+  <div class="absolute inset-0 bg-gradient-to-bl from-vsta-purple via-vsta-dark-blue to-vsta-teal"></div>
 
-    <!-- 1. تم تعديل flex-col إلى flex-col-reverse على الشاشات الصغيرة -->
-    <div
-      class="relative z-10 flex flex-col-reverse md:flex-row items-center justify-center md:justify-between max-w-screen-xl mx-auto px-4 sm:px-6 h-full gap-10">
+  <div
+    class="relative z-10 flex flex-col-reverse md:flex-row items-center justify-center md:justify-between max-w-screen-xl mx-auto px-4 sm:px-6 h-full gap-10">
 
-      <!-- 2. تم نقل الفورم ليأتي أولاً في الكود (ليظهر على اليسار في الشاشات الكبيرة) -->
-      <div class="bg-white/10 backdrop-blur-lg p-8 rounded-2xl w-full max-w-md md:w-1/2">
-        <h3 class="text-2xl text-white font-bold text-center mb-8">تواصل معنا</h3>
+    <!-- الفورم على اليسار -->
+    <div class="bg-white/10 backdrop-blur-lg p-8 rounded-2xl w-full max-w-md md:w-1/2">
+      <h3 class="text-2xl text-white font-bold text-center mb-8">تواصل معنا</h3>
 
-        <form action="#" class="space-y-6">
-          <input type="text" id="username" name="username" placeholder="الاسم الكامل"
-            class="w-full p-3 rounded-lg bg-transparent border border-white/30 placeholder-white/70 text-white focus:outline-none focus:ring-2 focus:ring-vsta-teal transition text-end ">
-          <input type="email" id="email" name="email" placeholder="البريد الإلكتروني"
-            class="w-full p-3 rounded-lg bg-transparent border border-white/30 placeholder-white/70 text-white focus:outline-none focus:ring-2 focus:ring-vsta-teal transition text-end">
-          <input type="tel" id="phone" name="phone" placeholder="رقم الهاتف"
-            class="w-full p-3 rounded-lg bg-transparent border border-white/30 placeholder-white/70 text-white focus:outline-none focus:ring-2 focus:ring-vsta-teal transition text-end ">
-          <textarea id="message" name="message" rows="4" placeholder="... رسالتك"
-            class="w-full p-3 rounded-lg bg-transparent border border-white/30 placeholder-white/70 text-white focus:outline-none focus:ring-2 focus:ring-vsta-teal transition text-end"></textarea>
-          <button type="submit"
-            class="w-full bg-vsta-teal text-vsta-dark-blue font-bold py-3 px-6 rounded-full hover:opacity-90 transition-opacity duration-300">
-            إرسال
-          </button>
-        </form>
-      </div>
-
-      <!-- الجزء النصي يأتي ثانيًا في الكود (ليظهر على اليمين في الشاشات الكبيرة) -->
-      <div class="text-white max-w-lg text-center md:text-end w-full md:w-1/2">
-        <h2 class="text-4xl md:text-5xl font-bold mb-4 leading-tight">
-          دعنا نبني شيئًا مذهلاً معًا!
-        </h2>
-        <p class="mb-8 text-lg text-gray-300">
-          هل لديك فكرة مشروع؟ تواصل معنا اليوم ودعنا نساعدك في تحويل رؤيتك إلى واقع ملموس.
-        </p>
-        <button
-          class="bg-vsta-teal text-vsta-dark-blue font-semibold py-3 px-8 rounded-full hover:opacity-90 transition">
-          ابدأ الآن
+      <form action="#" class="space-y-6">
+        <input type="text" id="username" name="username" placeholder="الاسم الكامل"
+          class="w-full p-3 rounded-lg bg-transparent border border-white/30 placeholder-white/70 text-white focus:outline-none focus:ring-2 focus:ring-vsta-teal transition text-end">
+        <input type="email" id="email" name="email" placeholder="البريد الإلكتروني"
+          class="w-full p-3 rounded-lg bg-transparent border border-white/30 placeholder-white/70 text-white focus:outline-none focus:ring-2 focus:ring-vsta-teal transition text-end">
+        <input type="tel" id="phone" name="phone" placeholder="رقم الهاتف"
+          class="w-full p-3 rounded-lg bg-transparent border border-white/30 placeholder-white/70 text-white focus:outline-none focus:ring-2 focus:ring-vsta-teal transition text-end">
+        <textarea id="message" name="message" rows="4" placeholder="رسالتك..."
+          class="w-full p-3 rounded-lg bg-transparent border border-white/30 placeholder-white/70 text-white focus:outline-none focus:ring-2 focus:ring-vsta-teal transition text-end"></textarea>
+        <button type="submit"
+          class="w-full bg-vsta-teal text-vsta-dark-blue font-bold py-3 px-6 rounded-full hover:opacity-90 transition-opacity duration-300">
+          إرسال
         </button>
-      </div>
-
+      </form>
     </div>
-  </section>
+
+    <!-- الجزء النصي على اليمين -->
+    <div class="text-white max-w-lg text-center md:text-end w-full md:w-1/2">
+      <h2 class="text-4xl md:text-5xl font-bold mb-4 leading-tight">
+        دعنا نبني شيئًا مذهلاً معًا!
+      </h2>
+      <p class="mb-8 text-lg text-gray-300">
+        هل لديك فكرة مشروع؟ تواصل معنا اليوم ودعنا نساعدك في تحويل رؤيتك إلى واقع ملموس.
+      </p>
+      <button
+        class="bg-vsta-teal text-vsta-dark-blue font-semibold py-3 px-8 rounded-full hover:opacity-90 transition">
+        ابدأ الآن
+      </button>
+    </div>
+
+  </div>
+</section>
 
 
 <footer class="bg-vsta-purple text-white">
