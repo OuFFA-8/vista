@@ -1,0 +1,10 @@
+/* هذا الكلاس يطبق على البطاقة عندما تكون نشطة */
+.active-service {
+  @apply bg-vsta-teal text-vsta-dark-blue;
+}
+
+/* الأيقونة والنص يتغير لونهم أيضًا عند تفعيل البطاقة */
+.active-service i,
+.active-service span {
+  @apply text-vsta-dark-blue;
+}
