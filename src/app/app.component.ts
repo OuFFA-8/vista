@@ -3,10 +3,11 @@ import { RouterOutlet } from '@angular/router';
 import { FlowbiteService } from './core/services/flowbite/flowbite.service';
 import { initFlowbite } from 'flowbite';
 import { NavbarComponent } from "./layout/navbar/navbar.component";
+import { LightboxComponent } from "./shared/components/lightbox/lightbox.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, NavbarComponent],
+  imports: [RouterOutlet, NavbarComponent, LightboxComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

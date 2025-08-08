@@ -3,9 +3,10 @@ import { isPlatformBrowser } from '@angular/common';
 import { gsap } from 'gsap';
 
 // استيراد الواجهات والخدمات من مكانها المركزي
-import { PortfolioService, Service, Project } from './../../core/services/portfolio/portfolio.service';
+import { PortfolioService, Service, Project, MediaItem } from './../../core/services/portfolio/portfolio.service';
 import { RouterLink } from '@angular/router';
 import { ScrollSpyService } from '../../core/services/scroll-spy/scroll-spy.service';
+import { LightboxService } from '../../core/services/lightbox/lightbox.service';
 
 @Component({
   selector: 'app-home',
@@ -15,8 +16,7 @@ import { ScrollSpyService } from '../../core/services/scroll-spy/scroll-spy.serv
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit, AfterViewInit {
-
-  // --- حقن الخدمات (Dependency Injection) ---
+  private lightboxService = inject(LightboxService);
   private scrollSpyService = inject(ScrollSpyService);
   private portfolioService = inject(PortfolioService);
 
@@ -31,14 +31,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
     });
   }
 
-  // --- دورة حياة الكومبوننت (Lifecycle Hooks) ---
   ngOnInit(): void {
-    // جلب البيانات من الخدمة عند بدء التشغيل
     this.services = this.portfolioService.getServices();
   }
 
   ngAfterViewInit(): void {
-    // تشغيل Scroll Spy لأول مرة بعد رسم الصفحة
     if (this.sections) {
       console.log('Found sections:', this.sections.length);
 
@@ -47,11 +44,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }
   }
 
-  // --- خصائص الـ View ---
   @ViewChild('clientsScroller') clientsScroller!: ElementRef;
   @ViewChildren('scrollSection') sections!: QueryList<ElementRef>;
 
-  // --- خصائص وإشارات إدارة الحالة (State Management Signals) ---
   services: Service[] = [];
   selectedService = signal<Service | null>(null);
   currentProjectIndex = signal(0);
@@ -59,7 +54,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
   lastAnimationDirection = signal<'next' | 'prev' | 'none'>('none');
   private navbarHeight = 100; // عدّل هذا الرقم ليناسب ارتفاع النافبار بالبكسل
 
-  // --- إشارات محسوبة (Computed Signals) ---
   currentProject = computed(() => {
     const service = this.selectedService();
     if (!service?.portfolio?.length) return null;
@@ -74,7 +68,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
     return portfolio ? portfolio.length > 1 : false;
   });
 
-  // --- بيانات خاصة بالكومبوننت ---
   clients = [
     { src: '/images/عملائنا/1.png', alt: '' }, { src: '/images/عملائنا/2.png', alt: '' },
     { src: '/images/عملائنا/3.png', alt: '' }, { src: '/images/عملائنا/4.png', alt: '' },
@@ -88,7 +81,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
     { src: '/images/عملائنا/19.png', alt: '' },
   ];
 
-  // --- دوال التحكم في واجهة المستخدم (UI Control Methods) ---
+  openInLightbox(item: MediaItem): void {
+    this.lightboxService.open(item);
+  }
+
+
   toggleService(service: Service): void {
     this.lastAnimationDirection.set('none');
     if (this.selectedService() === service) {
@@ -145,7 +142,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }
   }
 
-  // --- دوال الأنيميشن الخاصة (Private Animation Methods) ---
   private animatePortfolioIn(): void {
     const container = document.querySelector('.portfolio-container');
     if (!container) return;

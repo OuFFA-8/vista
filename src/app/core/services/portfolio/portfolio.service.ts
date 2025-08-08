@@ -10,7 +10,7 @@ export interface Project {
   media: MediaItem[];
   coverImage?: string;
   layout?: 'grid' | 'default';
-  details: { partner: string; client: string; type: string; };
+  details?: { partner: string; client: string; type: string; };
 }
 
 export interface Service {
@@ -32,29 +32,78 @@ export class PortfolioService {
         {
           id: 'graphics-project-1',
           media: [
-            { type: 'image', src: '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png' },
-            { type: 'image', src: '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png' },
-            { type: 'image', src: '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png' },
-            { type: 'image', src: '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png' },
-            { type: 'image', src: '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png' },
-            { type: 'image', src: '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png' },
-            { type: 'image', src: '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png' }
+            { type: 'image', src: '/images/تربس/تصاميم تربس_8.webp' },
+            { type: 'image', src: '/images/تربس/تصاميم تربس_4.webp' },
+            { type: 'image', src: '/images/تربس/تصاميم تربس_2.webp' },
+            { type: 'image', src: '/images/تربس/تصاميم تربس - رمضان_12.webp' },
+            { type: 'image', src: '/images/تربس/تصاميم تربس - رمضان_12 copy 4.webp' },
+            { type: 'image', src: '/images/تربس/تصاميم تربس - رمضان_12 copy 18.webp' },
+            { type: 'image', src: '/images/تربس/تصاميم تربس - رمضان_12 copy 17.webp' }
           ],
-          // --- تم إصلاح هذا الجزء ---
-          details: { partner: 'شركة مراكيز', client: 'تربس', type: 'إعلانات سوشيال ميديا' }
         },
         {
           id: 'graphics-project-2',
           media: [
-            { type: 'image', src: '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png' },
-            { type: 'image', src: '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png' },
-            { type: 'image', src: '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png' },
-            { type: 'image', src: '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png' },
-            { type: 'image', src: '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png' },
-            { type: 'image', src: '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png' },
-            { type: 'image', src: '/images/معرض كاش اكسبو/- ٢ - شكر وتقدير_.png' }
+            { type: 'image', src: '/images/الامباط العقارية/2 copy 10.webp ' },
+            { type: 'image', src: '/images/الامباط العقارية/2 copy 4.webp ' },
+            { type: 'image', src: '/images/الامباط العقارية/2 copy 9.webp ' },
+            { type: 'image', src: '/images/الامباط العقارية/2 copy 12.webp ' },
+            { type: 'image', src: '/images/الامباط العقارية/2 copy 13.webp ' },
+            { type: 'image', src: '/images/الامباط العقارية/2 copy 14.webp ' },
+            { type: 'image', src: '/images/الامباط العقارية/2 copy 16.webp ' }
           ],
-          // --- تم إصلاح هذا الجزء ---
+          details: { partner: 'شركة ألفا', client: 'نمو', type: 'تصميم هوية بصرية' }
+        },
+        {
+          id: 'graphics-project-3',
+          media: [
+            { type: 'image', src: '/images/الريادة قروب/1.webp ' },
+            { type: 'image', src: '/images/الريادة قروب/2.webp ' },
+            { type: 'image', src: '/images/الريادة قروب/7.webp ' },
+            { type: 'image', src: '/images/الريادة قروب/8.webp ' },
+            { type: 'image', src: '/images/الريادة قروب/9.webp ' },
+            { type: 'image', src: '/images/الريادة قروب/11.webp ' },
+            { type: 'image', src: '/images/الريادة قروب/12.webp ' }
+          ],
+          details: { partner: 'شركة ألفا', client: 'نمو', type: 'تصميم هوية بصرية' }
+        },
+        {
+          id: 'graphics-project-4',
+          media: [
+            { type: 'image', src: '/images/معرض كاش اكسبو/- ٢ - معرض copy 2.webp' },
+            { type: 'image', src: '/images/معرض كاش اكسبو/- ٣ - ختام ناجح لمعرض كاش إكسبو.webp' },
+            { type: 'image', src: '/images/معرض كاش اكسبو/معرض.webp' },
+            { type: 'image', src: '/images/معرض كاش اكسبو/١ - انستقرام - صور بقالب.webp' },
+            { type: 'image', src: '/images/معرض كاش اكسبو/٧.webp' },
+            { type: 'image', src: '/images/معرض كاش اكسبو/٨.webp' },
+            { type: 'image', src: '/images/معرض كاش اكسبو/٩.webp' }
+          ],
+          details: { partner: 'شركة ألفا', client: 'نمو', type: 'تصميم هوية بصرية' }
+        },
+        {
+          id: 'graphics-project-5',
+          media: [
+            { type: 'image', src: '/images/مدينة الملك عبدالله/انفو جرافيك 3 copy.webp' },
+            { type: 'image', src: '/images/مدينة الملك عبدالله/تصميم الاستدامة copy 2.webp ' },
+            { type: 'image', src: '/images/مدينة الملك عبدالله/مصادر copy 2.webp' },
+            { type: 'image', src: '/images/مدينة الملك عبدالله/مصادر copy 3.webp' },
+            { type: 'image', src: '/images/مدينة الملك عبدالله/مصادر copy 4.webp' },
+            { type: 'image', src: '/images/مدينة الملك عبدالله/موشن جرافيك copy 2.webp' },
+            { type: 'image', src: '/images/مدينة الملك عبدالله/يوم الشباب-1.webp' }
+          ],
+          details: { partner: 'شركة ألفا', client: 'نمو', type: 'تصميم هوية بصرية' }
+        },
+        {
+          id: 'graphics-project-6',
+          media: [
+            { type: 'image', src: '/images/دانكن/Artboard 1 (1).webp' },
+            { type: 'image', src: '/images/دانكن/Artboard 1.webp' },
+            { type: 'image', src: '/images/دانكن/الزعفران.webp' },
+            { type: 'image', src: '/images/دانكن/اللمه الحلوة.webp' },
+            { type: 'image', src: '/images/دانكن/تهنئة العيد دانكن.webp' },
+            { type: 'image', src: '/images/دانكن/صباحات دانكن.webp' },
+            { type: 'image', src: '/images/دانكن/نفهم جوك.webp' }
+          ],
           details: { partner: 'شركة ألفا', client: 'نمو', type: 'تصميم هوية بصرية' }
         }
       ]
@@ -65,9 +114,24 @@ export class PortfolioService {
       portfolio: [
         {
           id: 'website-project-1',
-          media: [{ type: 'image', src: 'https://i.imgur.com/uCjL9fQ.png' }],
+          media: [{ type: 'image', src: '/images/مواقع/الامبااط -١-.webp' }],
           details: { partner: 'العميل', client: 'المشروع', type: 'تطوير موقع' }
-        }
+        },
+        {
+          id: 'website-project-1',
+          media: [{ type: 'image', src: '/images/مواقع/الزامل والخراشي -٢-.webp' }],
+          details: { partner: 'العميل', client: 'المشروع', type: 'تطوير موقع' }
+        },
+        {
+          id: 'website-project-1',
+          media: [{ type: 'image', src: '/images/مواقع/الزاملية -١.webp' }],
+          details: { partner: 'العميل', client: 'المشروع', type: 'تطوير موقع' }
+        },
+        {
+          id: 'website-project-1',
+          media: [{ type: 'image', src: '/images/مواقع/دار العقارية ة.webp' }],
+          details: { partner: 'العميل', client: 'المشروع', type: 'تطوير موقع' }
+        },
       ]
     },
     {
@@ -77,12 +141,22 @@ export class PortfolioService {
         {
           id: 'video-project-1',
           media: [
-            { type: 'video', src: 'https://assets.mixkit.co/videos/preview/mixkit-waves-in-the-ocean-1164-large.mp4' },
-            { type: 'video', src: 'https://assets.mixkit.co/videos/preview/mixkit-the-spheres-of-a-trinitarian-clock-42872-large.mp4' },
-            { type: 'video', src: 'https://assets.mixkit.co/videos/preview/mixkit-mysterious-pale-hornet-moth-in-a-close-up-shot-48842-large.mp4' },
-            { type: 'video', src: 'https://assets.mixkit.co/videos/preview/mixkit-marketing-and-business-plan-34139-large.mp4' }
+            { type: 'video', src: '/images/إنتاج إعلامي/رواد جادة الابتكار، فيديو الرياض.mp4' },
+            { type: 'video', src: '/images/إنتاج إعلامي/رواد جادة الابتكار، فيديو معرض الإطلاق 1.mp4' },
+            { type: 'video', src: '/images/إنتاج إعلامي/هاكثون المدينة - المسارات 4.mp4' },
+            { type: 'video', src: '/images/إنتاج إعلامي/جمعية تحفيظ القران المدينة المنورة Full Modify (1).mp4' },
           ],
           // --- تم إصلاح هذا الجزء ---
+          details: { partner: 'استديو فيستا', client: 'خاص', type: 'فيديوهات ترويجية' }
+        },
+        {
+          id: 'video-project-1',
+          media: [
+            { type: 'video', src: '/images/إنتاج إعلامي/مجلس الجمعيات الاهلية مؤثرات.mp4' },
+            { type: 'video', src: '/images/إنتاج إعلامي/كفالة يتيم جاهز (1).mp4' },
+            { type: 'video', src: '/images/إنتاج إعلامي/امور الحياة03.mp4' },
+            { type: 'video', src: '/images/إنتاج إعلامي/الدخول لموقع الشامل.mp4' },
+          ],
           details: { partner: 'استديو فيستا', client: 'خاص', type: 'فيديوهات ترويجية' }
         }
       ]
@@ -94,48 +168,51 @@ export class PortfolioService {
         {
           id: 'branding-project-1',
           layout: 'grid',
-          coverImage: 'https://i.imgur.com/K5aE8v7.png',
+          coverImage: '/images/Hawweat/4/٧-03.webp',
           media: [
-            { type: 'image', src: 'https://i.imgur.com/z4iJtY9.png' },
-            { type: 'image', src: 'https://i.imgur.com/8QG3cSA.png' },
-            { type: 'image', src: 'https://i.imgur.com/tC7gL0p.png' },
-            { type: 'image', src: 'https://i.imgur.com/o15A1hN.png' }
+            { type: 'image', src: '/images/Hawweat/4/٧-01.webp' },
+            { type: 'image', src: '/images/Hawweat/4/٧-02.webp' },
+            { type: 'image', src: '/images/Hawweat/4/٧-03.webp' },
+            { type: 'image', src: '/images/Hawweat/4/٧-05.webp' }
           ],
           details: { partner: 'اسم العميل', client: 'براندق 1', type: 'بناء هوية' }
         },
         {
           id: 'branding-project-2',
           layout: 'grid',
-          coverImage: 'https://i.imgur.com/5u9b2bH.png',
+          coverImage: '/images/Hawweat/3/1.webp',
           media: [
-            { type: 'image', src: 'https://i.imgur.com/g0n4A6m.png' },
-            { type: 'image', src: 'https://i.imgur.com/uP2A1rN.png' },
-            { type: 'image', src: 'https://i.imgur.com/Hn2yLg7.png' },
-            { type: 'image', src: 'https://i.imgur.com/qE4JvRj.png' }
+            { type: 'image', src: '/images/Hawweat/3/1.webp' },
+            { type: 'image', src: '/images/Hawweat/3/2.webp' },
+            { type: 'image', src: '/images/Hawweat/3/3.webp' },
+            { type: 'image', src: '/images/Hawweat/3/4.webp' },
+            { type: 'image', src: '/images/Hawweat/3/6.webp' },
+            { type: 'image', src: '/images/Hawweat/3/5.webp' }
           ],
           details: { partner: 'عميل آخر', client: 'براندق 2', type: 'إعادة تصميم هوية' }
         },
         {
           id: 'branding-project-3',
           layout: 'grid',
-          coverImage: 'https://i.imgur.com/5u9b2bH.png',
+          coverImage: '/images/Hawweat/2/9-01.webp',
           media: [
-            { type: 'image', src: 'https://i.imgur.com/g0n4A6m.png' },
-            { type: 'image', src: 'https://i.imgur.com/uP2A1rN.png' },
-            { type: 'image', src: 'https://i.imgur.com/Hn2yLg7.png' },
-            { type: 'image', src: 'https://i.imgur.com/qE4JvRj.png' }
+            { type: 'image', src: '/images/Hawweat/2/9-01.webp' },
+            { type: 'image', src: '/images/Hawweat/2/9-02.webp' },
+            { type: 'image', src: '/images/Hawweat/2/9-03.webp' },
+            { type: 'image', src: '/images/Hawweat/2/9-04.webp' },
+            { type: 'image', src: '/images/Hawweat/2/9-05.webp' },
           ],
           details: { partner: 'عميل آخر', client: 'براندق 3', type: 'إعادة تصميم هوية' }
         },
         {
           id: 'branding-project-4',
           layout: 'grid',
-          coverImage: 'https://i.imgur.com/5u9b2bH.png',
+          coverImage: '/images/Hawweat/1/8-01.webp',
           media: [
-            { type: 'image', src: 'https://i.imgur.com/g0n4A6m.png' },
-            { type: 'image', src: 'https://i.imgur.com/uP2A1rN.png' },
-            { type: 'image', src: 'https://i.imgur.com/Hn2yLg7.png' },
-            { type: 'image', src: 'https://i.imgur.com/qE4JvRj.png' }
+            { type: 'image', src: '/images/Hawweat/1/8-01.webp' },
+            { type: 'image', src: '/images/Hawweat/1/8-02.webp' },
+            { type: 'image', src: '/images/Hawweat/1/8-03.webp' },
+            { type: 'image', src: '/images/Hawweat/1/8-05.webp' }
           ],
           details: { partner: 'عميل آخر', client: 'براندق 4', type: 'إعادة تصميم هوية' }
         },

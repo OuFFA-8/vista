@@ -1,0 +1,24 @@
+<!-- استخدم @if لعرض الـ Lightbox فقط عندما يكون مفتوحًا -->
+@if (lightboxService.isOpen()) {
+  <!-- 1. الخلفية المعتمة، عند الضغط عليها يتم الإغلاق -->
+  <div (click)="closeLightbox()" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[999] flex items-center justify-center lightbox-fade-in">
+    
+    <!-- 2. حاوية الفيديو (تمنع إغلاق الـ Lightbox عند الضغط على الفيديو نفسه) -->
+    <div (click)="$event.stopPropagation()" class="relative w-full max-w-4xl p-4">
+      
+      <!-- 3. زر الإغلاق -->
+      <button (click)="closeLightbox()" class="absolute -top-2 -right-2 z-10 bg-white text-black w-10 h-10 rounded-full text-2xl flex items-center justify-center hover:scale-110 transition-transform">
+        &times;
+      </button>
+
+      <!-- 4. مشغل الفيديو -->
+      @if(lightboxService.activeMedia(); as media) {
+        <div class="aspect-video">
+          <!-- الفيديو هنا يعمل تلقائيًا ويحتوي على أزرار تحكم -->
+          <video [src]="media.src" class="w-full h-full rounded-lg" controls autoplay playsinline></video>
+        </div>
+      }
+    </div>
+
+  </div>
+}

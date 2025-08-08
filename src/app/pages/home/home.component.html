@@ -1,4 +1,3 @@
-
 <main class="bg-vsta-purple text-white font-sans overflow-x-hidden">
 
   <!-- =============================== -->
@@ -45,103 +44,134 @@
       </div>
 
       <!-- ============================================= -->
-      <!-- ===== START: Portfolio Display Section (Unified Grid Layout) ===== -->
+      <!-- ===== START: Portfolio Display Section (Final Corrected Version) ===== -->
       <!-- ============================================= -->
       @if (selectedService(); as service) {
       <div class="relative mt-12 px-12 md:px-16 mx-auto">
 
         @if (hasMultipleProjects()) {
         <button (click)="prevProject()"
-          class="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-vsta-purple text-white w-10 h-10 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform">
-          <i class="fa-solid fa-chevron-left"></i>
-        </button>
+          class="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-vsta-purple text-white w-10 h-10 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform"><i
+            class="fa-solid fa-chevron-left"></i></button>
         <button (click)="nextProject()"
-          class="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-vsta-purple text-white w-10 h-10 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform">
-          <i class="fa-solid fa-chevron-right"></i>
-        </button>
+          class="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-vsta-purple text-white w-10 h-10 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform"><i
+            class="fa-solid fa-chevron-right"></i></button>
         }
 
         <div class="overflow-hidden">
-          <div class="p-3 bg-white rounded-3xl shadow-xl portfolio-container">
-            @if(currentProject(); as project) {
+          <div class="p-6 bg-white rounded-3xl shadow-xl"> <!-- الحاوية البيضاء الرئيسية -->
 
-            @if (project.media[0].type === 'video') {
-            <!-- 1. تصميم الفيديوهات يبقى كما هو (يعرض كل الفيديوهات) -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
-              @for (item of project.media; track item) {
-              <div class="rounded-lg overflow-hidden aspect-video">
-                <video [src]="item.src" class="w-full h-full object-cover" controls muted loop autoplay
-                  playsinline></video>
+            <!-- 1. الشرط الرئيسي: هل هو تصميم شبكي (براندق)؟ -->
+            @if (service.portfolio && service.portfolio[0].layout === 'grid') {
+
+            <div class="portfolio-container">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                @for (project of service.portfolio; track project.id) {
+                <a [routerLink]="['/portfolio', project.id]"
+                  class="block rounded-lg overflow-hidden aspect-video group/image">
+                  <img [src]="project.coverImage" alt="Cover for {{ project.details?.client }}"
+                    class="w-full h-full object-cover transition-transform duration-300 group-hover/image:scale-105">
+                </a>
+                }
               </div>
-              }
-            </div>
-
-            }
-            @else if (project.layout === 'grid') {
-            <!-- ============================================= -->
-            <!-- ===== هذا هو التعديل الوحيد الذي تم ===== -->
-            <!-- ============================================= -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
-              <!-- نقوم بالحلقة على كل المشاريع في الخدمة -->
-              @for (p of service.portfolio; track p.id) {
-              <a [routerLink]="['/portfolio', p.id]" class="block rounded-lg overflow-hidden aspect-video group/image">
-                <!-- نعرض الصورة الرئيسية coverImage -->
-                <img [src]="p.coverImage" alt="Cover for {{ p.details.client }}"
-                  class="w-full h-full object-cover transition-transform duration-300 group-hover/image:scale-105">
-              </a>
-              }
-            </div>
-            }
-            @else if (project.media.length > 1) {
-
-            <div class="grid grid-cols-1 lg:grid-cols-6 gap-2">
-              <div class="lg:col-span-3 lg:order-last main-image-container">
-                <div class="rounded-lg overflow-hidden md:h-[564px] 2xl:h-[703px]">
-                  <img [src]="project.media[0].src" alt="Main project image" class="w-full h-full object-cover">
+              @if (currentProject(); as project) {
+              <div class="mt-8 pt-6 border-t border-gray-200 grid grid-cols-3 text-center">
+                <div class="px-4">
+                  <h4 class="text-gray-400 text-sm mb-1">الشريك</h4>
+                  <p class="font-bold text-lg">{{ project.details?.partner }}</p>
+                </div>
+                <div class="px-4 border-x border-gray-200">
+                  <h4 class="text-gray-400 text-sm mb-1">العميل</h4>
+                  <p class="font-bold text-lg">{{ project.details?.client }}</p>
+                </div>
+                <div class="px-4">
+                  <h4 class="text-gray-400 text-sm mb-1">النوع</h4>
+                  <p class="font-bold text-lg">{{ project.details?.type }}</p>
                 </div>
               </div>
-              <div class="lg:col-span-3 thumbnails-grid">
-                <div class="grid grid-cols-2 lg:grid-cols-3 gap-2">
-                  @for (item of project.media.slice(1); track item) {
-                  <div class="rounded-lg overflow-hidden">
-                    <img [src]="item.src" alt="Project thumbnail"
-                      class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
-                  </div>
-                  }
-                </div>
-              </div>
+              }
             </div>
 
             } @else {
-            <div class="rounded-lg overflow-hidden">
-              <img [src]="project.media[0].src" alt="Single project image" class="w-full h-auto object-contain">
-            </div>
-            }
-            }
-            <div class="mt-8 pt-6 border-t border-gray-200 grid grid-cols-3 text-center">
+
+            <!-- 2. تصميم السلايدر لباقي الخدمات -->
+            <div class="portfolio-container">
               @if(currentProject(); as project) {
+
+              @if (project.media[0].type === 'video') {
+              <!-- ============================================= -->
+              <!-- ===== هذا هو تصميم الفيديوهات الصحيح (مع الـ Lightbox) ===== -->
+              <!-- ============================================= -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                @for (item of project.media; track item) {
+                <button (click)="openInLightbox(item)"
+                  class="relative block w-full rounded-lg overflow-hidden aspect-video group">
+                  <video [src]="item.src + '#t=0.1'" class="w-full h-full object-cover" muted preload="metadata"
+                    playsinline></video>
+                  <div
+                    class="absolute inset-0 bg-black/40 flex items-center justify-center transition-opacity duration-300 opacity-100 group-hover:opacity-70">
+                    <div
+                      class="w-16 h-16 bg-white/30 rounded-full flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+                      <i class="fa-solid fa-play text-white text-2xl ml-1"></i>
+                    </div>
+                  </div>
+                </button>
+                }
+              </div>
+
+              } @else if (project.media.length > 1) {
+              <!-- تصميم الصور المتعددة (تصاميم جرافيك) -->
+              <div class="grid grid-cols-1 md:grid-cols-5 gap-2">
+                <div class="md:col-span-3 md:order-last main-image-container">
+                  <div class="rounded-lg overflow-hidden aspect-square">
+                    <img [src]="project.media[0].src" alt="Main project image" class="w-full h-full object-cover">
+                  </div>
+                </div>
+                <div class="md:col-span-2 thumbnails-grid h-full">
+                  <div class="grid grid-cols-2 gap-2 h-full">
+                    @for (item of project.media.slice(1); track item) {
+                    <div class="rounded-lg overflow-hidden">
+                      <img [src]="item.src" alt="Project thumbnail"
+                        class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
+                    </div>
+                    }
+                  </div>
+                </div>
+              </div>
+
+              } @else {
+              <!-- تصميم الصورة الواحدة (ويب سايت) -->
+              <div class="rounded-lg overflow-hidden">
+                <img [src]="project.media[0].src" alt="Single project image" class="w-full h-auto object-contain">
+              </div>
+              }
+              }
+            </div>
+            <!-- شريط التفاصيل الخاص بالسلايدر -->
+            @if(currentProject(); as project) {
+            <div class="mt-8 pt-6 border-t border-gray-200 grid grid-cols-3 text-center">
               <div class="px-4">
                 <h4 class="text-gray-400 text-sm mb-1">الشريك</h4>
-                <p class="font-bold text-lg">{{ project.details.partner }}</p>
+                <p class="font-bold text-lg">{{ project.details?.partner }}</p>
               </div>
               <div class="px-4 border-x border-gray-200">
                 <h4 class="text-gray-400 text-sm mb-1">العميل</h4>
-                <p class="font-bold text-lg">{{ project.details.client }}</p>
+                <p class="font-bold text-lg">{{ project.details?.client }}</p>
               </div>
               <div class="px-4">
                 <h4 class="text-gray-400 text-sm mb-1">النوع</h4>
-                <p class="font-bold text-lg">{{ project.details.type }}</p>
+                <p class="font-bold text-lg">{{ project.details?.type }}</p>
               </div>
-              }
             </div>
+            }
+
+            }
           </div>
         </div>
 
       </div>
       }
       <!-- ===== END: Portfolio Display Section ===== -->
-
-
     </div>
   </section>
 

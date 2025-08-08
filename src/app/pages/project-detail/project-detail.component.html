@@ -13,21 +13,21 @@
         <div class="container mx-auto px-6 lg:px-8 relative z-10">
             <p class="text-lg text-gray-300 mb-4 text-center">إبداع، تأثير، انتشار</p>
             <h1 class="text-7xl md:text-8xl font-black text-center">
-                <span class="text-vsta-teal">{{ p.details.client.slice(0, 5) }}</span>{{ p.details.client.slice(5) }}
+                <span class="text-vsta-teal">{{ p.details?.client?.slice(0, 5) }}</span>{{ p.details?.client?.slice(5) }}
             </h1>
             <div
                 class="mt-12 flex justify-center items-center text-center space-x-8 rtl:space-x-reverse divide-x rtl:divide-x-reverse divide-gray-500">
                 <div class="px-8">
                     <h4 class="text-gray-400 text-sm mb-1">الشريك</h4>
-                    <p class="font-bold text-lg">{{ p.details.partner }}</p>
+                    <p class="font-bold text-lg">{{ p.details?.partner }}</p>
                 </div>
                 <div class="px-8">
                     <h4 class="text-gray-400 text-sm mb-1">العميل</h4>
-                    <p class="font-bold text-lg">{{ p.details.client }}</p>
+                    <p class="font-bold text-lg">{{ p.details?.client }}</p>
                 </div>
                 <div class="px-8">
                     <h4 class="text-gray-400 text-sm mb-1">النوع</h4>
-                    <p class="font-bold text-lg">{{ p.details.type }}</p>
+                    <p class="font-bold text-lg">{{ p.details?.type }}</p>
                 </div>
             </div>
         </div>
@@ -36,25 +36,23 @@
     <!-- =============================== -->
     <!-- ===== Project Content Section (Updated) ===== -->
     <!-- =============================== -->
-    <!-- 2. تم تغيير الهامش العلوي السالب -->
     <section class="bg-gray-100 pb-20 -mt-16">
         <div class="container mx-auto px-6 lg:px-8">
-            <!-- 3. تم إزالة لون الخلفية (bg-vsta-dark-blue) والظل (shadow-2xl) -->
             <div class="rounded-3xl p-6 md:p-10 content-panel">
 
                 @if (p.media.length > 0) {
                 <div class="max-w-4xl mx-auto flex flex-col items-center gap-4">
 
                     <div class="w-full rounded-lg overflow-hidden">
-                        <img [src]="p.media[0].src" alt="Main project image for {{p.details.client}}"
+                        <img [src]="p.media[0].src" alt="Main project image for {{p.details?.client}}"
                             class="w-full h-full object-cover">
                     </div>
 
                     @if (p.media.length > 1) {
                     <div class="w-full grid grid-cols-1 gap-4">
-                        @for (item of p.media.slice(1, 4); track item.src) {
+                        @for (item of p.media.slice(1, 6); track item.src) {
                         <div class="rounded-lg overflow-hidden">
-                            <img [src]="item.src" alt="Project thumbnail for {{p.details.client}}"
+                            <img [src]="item.src" alt="Project thumbnail for {{p.details?.client}}"
                                 class="w-full h-full object-cover">
                         </div>
                         }
