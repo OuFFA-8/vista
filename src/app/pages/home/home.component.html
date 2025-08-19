@@ -17,163 +17,75 @@
     </div>
   </section>
 
-  <!-- =============================== -->
-  <!-- ===== Main Content Section ===== -->
-  <!-- =============================== -->
 
+
+  <!-- =============================== -->
+  <!-- ===== Services Section ===== -->
+  <!-- =============================== -->
   <section id="services" #scrollSection class="bg-gray-100 pt-32 pb-20 text-vsta-dark-blue">
     <div class="container mx-auto px-6 lg:px-8">
-
-      <!-- 3. البطاقات الآن داخل القسم الرمادي، ومرتفعة للأعلى بـ margin سالب -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 -mt-56 relative z-10">
-        @for (service of services.slice().reverse(); track service) {
-        <button (click)="toggleService(service)" [class.active-service]="selectedService() === service"
-          [disabled]="!service.portfolio || service.portfolio.length === 0"
-          class="group relative text-white rounded-3xl p-8 flex flex-col justify-center items-center text-center transform hover:-translate-y-2 transition-all duration-300 shadow-2xl min-h-[280px] bg-vsta-dark-blue disabled:opacity-50 disabled:cursor-not-allowed">
+      <!-- استخدمنا Grid مع تحديد اتجاه RTL على الديسكتوب فقط -->
+      <div class="grid grid-cols-1 md:grid-cols-4 md:direction-rtl gap-8 -mt-56 relative z-10">
+        @for (service of services; track service) {
+        <!-- أضفنا md:direction-ltr هنا ليعود المحتوى الداخلي للبطاقة إلى طبيعته -->
+        <div
+          class="group relative text-white rounded-3xl p-8 flex flex-col justify-center items-center text-center shadow-2xl min-h-[280px] bg-vsta-dark-blue md:direction-ltr">
           <i
             class="fa-solid fa-arrow-up absolute top-8 right-8 text-vsta-teal text-2xl transition-transform duration-300 rotate-45 group-hover:scale-125 group-hover:rotate-[40deg]"></i>
           <div class="flex flex-col items-center">
             <h3 class="text-4xl font-bold whitespace-pre-line">{{ service.title }}</h3>
-            <div class="w-16 h-0.5 bg-vsta-teal mt-6 mb-4">
-
-            </div>
+            <div class="w-16 h-0.5 bg-vsta-teal mt-6 mb-4"></div>
             <span class="text-vsta-teal text-sm font-semibold">{{ service.linkText }}</span>
           </div>
+        </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================= -->
+  <!-- ===== START: Portfolio Section (Nav & Tabs) ===== -->
+  <!-- ============================================= -->
+  <section id="portfolio" #scrollSection class="bg-gray-100 pb-20 text-vsta-dark-blue">
+    <div class="container mx-auto px-6 lg:px-8">
+      <h2 class="text-4xl font-bold text-center mb-12">أعمالنا</h2>
+
+
+      <div class="flex flex-row-reverse justify-center items-center gap-4 md:gap-8 mb-12">
+        @for (service of services; track service) {
+        <button (click)="changeTab(service)" [class.active-tab]="activeTab() === service"
+          class="px-6 py-2 rounded-full font-semibold transition-colors duration-300 tab-btn">
+          {{ service.title }}
         </button>
         }
       </div>
 
-      <!-- ============================================= -->
-      <!-- ===== START: Portfolio Display Section (Final Corrected Version) ===== -->
-      <!-- ============================================= -->
-      @if (selectedService(); as service) {
-      <div class="relative mt-12 px-12 md:px-16 mx-auto">
-
-        @if (hasMultipleProjects()) {
-        <button (click)="prevProject()"
-          class="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-vsta-purple text-white w-10 h-10 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform"><i
-            class="fa-solid fa-chevron-left"></i></button>
-        <button (click)="nextProject()"
-          class="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-vsta-purple text-white w-10 h-10 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform"><i
-            class="fa-solid fa-chevron-right"></i></button>
-        }
-
-        <div class="overflow-hidden">
-          <div class="p-6 bg-white rounded-3xl shadow-xl"> <!-- الحاوية البيضاء الرئيسية -->
-
-            <!-- 1. الشرط الرئيسي: هل هو تصميم شبكي (براندق)؟ -->
-            @if (service.portfolio && service.portfolio[0].layout === 'grid') {
-
-            <div class="portfolio-container">
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
-                @for (project of service.portfolio; track project.id) {
-                <a [routerLink]="['/portfolio', project.id]"
-                  class="block rounded-lg overflow-hidden aspect-video group/image">
-                  <img [src]="project.coverImage" alt="Cover for {{ project.details?.client }}"
-                    class="w-full h-full object-cover transition-transform duration-300 group-hover/image:scale-105">
-                </a>
-                }
-              </div>
-              @if (currentProject(); as project) {
-              <div class="mt-8 pt-6 border-t border-gray-200 grid grid-cols-3 text-center">
-                <div class="px-4">
-                  <h4 class="text-gray-400 text-sm mb-1">الشريك</h4>
-                  <p class="font-bold text-lg">{{ project.details?.partner }}</p>
-                </div>
-                <div class="px-4 border-x border-gray-200">
-                  <h4 class="text-gray-400 text-sm mb-1">العميل</h4>
-                  <p class="font-bold text-lg">{{ project.details?.client }}</p>
-                </div>
-                <div class="px-4">
-                  <h4 class="text-gray-400 text-sm mb-1">النوع</h4>
-                  <p class="font-bold text-lg">{{ project.details?.type }}</p>
-                </div>
-              </div>
-              }
+      <!-- حاوية عرض المشاريع -->
+      @if (activeTab(); as tab) {
+      <!-- 1. أضفنا dir="rtl" هنا لنجعل الشبكة تبدأ من اليمين -->
+      <div dir="rtl" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 portfolio-grid">
+        @for (project of tab.portfolio; track project.id) {
+        <!-- 2. أضفنا dir="ltr" هنا لنعيد النص داخل البطاقة إلى اتجاهه الصحيح -->
+        <a dir="ltr" [routerLink]="['/portfolio', project.id]"
+          class="block rounded-lg overflow-hidden aspect-square group">
+          <div class="relative w-full h-full">
+            <img [src]="project.coverImage" alt="Cover for {{ project.details?.client }}"
+              class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+            <div
+              class="absolute inset-0 bg-vsta-teal/80 flex items-center justify-center p-4 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <!-- 2. تم تغيير لون النص إلى vsta-dark-blue -->
+              <h3 class="text-vsta-dark-blue font-bold text-xl">{{ project.details?.client }}</h3>
             </div>
-
-            } @else {
-
-            <!-- 2. تصميم السلايدر لباقي الخدمات -->
-            <div class="portfolio-container">
-              @if(currentProject(); as project) {
-
-              @if (project.media[0].type === 'video') {
-              <!-- ============================================= -->
-              <!-- ===== هذا هو تصميم الفيديوهات الصحيح (مع الـ Lightbox) ===== -->
-              <!-- ============================================= -->
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
-                @for (item of project.media; track item) {
-                <button (click)="openInLightbox(item)"
-                  class="relative block w-full rounded-lg overflow-hidden aspect-video group">
-                  <video [src]="item.src + '#t=0.1'" class="w-full h-full object-cover" muted preload="metadata"
-                    playsinline></video>
-                  <div
-                    class="absolute inset-0 bg-black/40 flex items-center justify-center transition-opacity duration-300 opacity-100 group-hover:opacity-70">
-                    <div
-                      class="w-16 h-16 bg-white/30 rounded-full flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
-                      <i class="fa-solid fa-play text-white text-2xl ml-1"></i>
-                    </div>
-                  </div>
-                </button>
-                }
-              </div>
-
-              } @else if (project.media.length > 1) {
-              <!-- تصميم الصور المتعددة (تصاميم جرافيك) -->
-              <div class="grid grid-cols-1 md:grid-cols-5 gap-2">
-                <div class="md:col-span-3 md:order-last main-image-container">
-                  <div class="rounded-lg overflow-hidden aspect-square">
-                    <img [src]="project.media[0].src" alt="Main project image" class="w-full h-full object-cover">
-                  </div>
-                </div>
-                <div class="md:col-span-2 thumbnails-grid h-full">
-                  <div class="grid grid-cols-2 gap-2 h-full">
-                    @for (item of project.media.slice(1); track item) {
-                    <div class="rounded-lg overflow-hidden">
-                      <img [src]="item.src" alt="Project thumbnail"
-                        class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
-                    </div>
-                    }
-                  </div>
-                </div>
-              </div>
-
-              } @else {
-              <!-- تصميم الصورة الواحدة (ويب سايت) -->
-              <div class="rounded-lg overflow-hidden">
-                <img [src]="project.media[0].src" alt="Single project image" class="w-full h-auto object-contain">
-              </div>
-              }
-              }
-            </div>
-            <!-- شريط التفاصيل الخاص بالسلايدر -->
-            @if(currentProject(); as project) {
-            <div class="mt-8 pt-6 border-t border-gray-200 grid grid-cols-3 text-center">
-              <div class="px-4">
-                <h4 class="text-gray-400 text-sm mb-1">الشريك</h4>
-                <p class="font-bold text-lg">{{ project.details?.partner }}</p>
-              </div>
-              <div class="px-4 border-x border-gray-200">
-                <h4 class="text-gray-400 text-sm mb-1">العميل</h4>
-                <p class="font-bold text-lg">{{ project.details?.client }}</p>
-              </div>
-              <div class="px-4">
-                <h4 class="text-gray-400 text-sm mb-1">النوع</h4>
-                <p class="font-bold text-lg">{{ project.details?.type }}</p>
-              </div>
-            </div>
-            }
-
-            }
           </div>
-        </div>
-
+        </a>
+        }
       </div>
       }
-      <!-- ===== END: Portfolio Display Section ===== -->
     </div>
   </section>
+  <!-- ===== END: Portfolio Section ===== -->
+
+
 
   <!-- =============================== -->
   <!-- ===== Clients Section (Slider) ===== -->

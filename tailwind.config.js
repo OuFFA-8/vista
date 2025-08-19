@@ -17,7 +17,18 @@ module.exports = {
   },
   plugins: [
     require('flowbite/plugin'),
-    require('tailwind-scrollbar-hide')
+    require('tailwind-scrollbar-hide'),
+    function ({ addUtilities }) {
+      const newUtilities = {
+        '.direction-rtl': {
+          direction: 'rtl',
+        },
+        '.direction-ltr': {
+          direction: 'ltr',
+        },
+      }
+      addUtilities(newUtilities)
+    }
   ],
 }
 

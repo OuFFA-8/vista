@@ -9,7 +9,7 @@ export interface Project {
   id: string;
   media: MediaItem[];
   coverImage?: string;
-  layout?: 'grid' | 'default';
+  layout?: 'grid' | 'default' | 'focus-grid'; 
   details?: { partner: string; client: string; type: string; };
 }
 
@@ -31,6 +31,7 @@ export class PortfolioService {
       portfolio: [
         {
           id: 'graphics-project-1',
+          layout: 'focus-grid',
           media: [
             { type: 'image', src: '/images/تربس/تصاميم تربس_8.webp' },
             { type: 'image', src: '/images/تربس/تصاميم تربس_4.webp' },
@@ -43,6 +44,7 @@ export class PortfolioService {
         },
         {
           id: 'graphics-project-2',
+          layout: 'focus-grid',
           media: [
             { type: 'image', src: '/images/الامباط العقارية/2 copy 10.webp ' },
             { type: 'image', src: '/images/الامباط العقارية/2 copy 4.webp ' },
@@ -56,6 +58,7 @@ export class PortfolioService {
         },
         {
           id: 'graphics-project-3',
+          layout: 'focus-grid',
           media: [
             { type: 'image', src: '/images/الريادة قروب/1.webp ' },
             { type: 'image', src: '/images/الريادة قروب/2.webp ' },
@@ -69,6 +72,7 @@ export class PortfolioService {
         },
         {
           id: 'graphics-project-4',
+          layout: 'focus-grid',
           media: [
             { type: 'image', src: '/images/معرض كاش اكسبو/- ٢ - معرض copy 2.webp' },
             { type: 'image', src: '/images/معرض كاش اكسبو/- ٣ - ختام ناجح لمعرض كاش إكسبو.webp' },
@@ -82,6 +86,7 @@ export class PortfolioService {
         },
         {
           id: 'graphics-project-5',
+          layout: 'focus-grid',
           media: [
             { type: 'image', src: '/images/مدينة الملك عبدالله/انفو جرافيك 3 copy.webp' },
             { type: 'image', src: '/images/مدينة الملك عبدالله/تصميم الاستدامة copy 2.webp ' },
@@ -95,6 +100,7 @@ export class PortfolioService {
         },
         {
           id: 'graphics-project-6',
+          layout: 'focus-grid',
           media: [
             { type: 'image', src: '/images/دانكن/Artboard 1 (1).webp' },
             { type: 'image', src: '/images/دانكن/Artboard 1.webp' },
