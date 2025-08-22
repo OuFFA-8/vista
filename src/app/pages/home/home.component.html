@@ -45,8 +45,9 @@
     </div>
   </section>
 
+
   <!-- ============================================= -->
-  <!-- ===== START: Portfolio Section (Hybrid Logic) ===== -->
+  <!-- ===== START: Portfolio Section (Final Hybrid Logic) ===== -->
   <!-- ============================================= -->
   <section id="portfolio" #scrollSection class="bg-gray-100 pb-20 text-vsta-dark-blue">
     <div class="container mx-auto px-6 lg:px-8">
@@ -66,11 +67,27 @@
         @for (project of tab.portfolio; track project.id) {
 
         <!-- ============================================= -->
-        <!-- START: هذا هو الشرط الذكي الذي يفرق بين الحالتين -->
+        <!-- START: هذا هو الشرط الذكي الجديد -->
         <!-- ============================================= -->
-        @if (tab.title === 'براندق') {
 
-        <!-- 1. حالة "براندق": استخدم <a> مع routerLink للانتقال لصفحة أخرى -->
+        @if (project.siteUrl) {
+        <!-- 1. حالة "ويب سايت": <a> عادي مع زر داخلي -->
+        <a dir="ltr" [href]="project.siteUrl" target="_blank"
+          class="block rounded-lg overflow-hidden aspect-square group">
+          <div class="relative w-full h-full">
+            <img [src]="project.coverImage" alt="Cover for {{ project.details?.client }}"
+              class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+            <div
+              class="absolute inset-0 bg-black/60 flex flex-col items-center justify-center p-4 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <h3 class="text-white font-bold text-xl mb-4">{{ project.details?.client }}</h3>
+              <div class="px-4 py-2 bg-vsta-teal text-vsta-dark-blue rounded-full font-semibold text-sm">
+                انتقل إلى الموقع
+              </div>
+            </div>
+          </div>
+        </a>
+        } @else if (tab.title === 'براندق') {
+        <!-- 2. حالة "براندق": <a> مع routerLink -->
         <a dir="ltr" [routerLink]="['/portfolio', project.id]"
           class="block rounded-lg overflow-hidden aspect-square group">
           <div class="relative w-full h-full">
@@ -78,14 +95,12 @@
               class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
             <div
               class="absolute inset-0 bg-vsta-teal/80 flex items-center justify-center p-4 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <h3 class="text-vsta-dark-blue font-bold text-xl">{{ project.details?.client }}</h3>
+              <h3 class="text-vsta-dark-blue font-bold text-xl">عرض التفاصيل</h3>
             </div>
           </div>
         </a>
-
         } @else {
-
-        <!-- 2. باقي الخدمات: استخدم <button> مع (click) لفتح الـ Lightbox -->
+        <!-- 3. باقي الخدمات: <button> لفتح الـ Lightbox -->
         <button dir="ltr" (click)="openGalleryInLightbox(project)"
           class="block rounded-lg overflow-hidden aspect-square group">
           <div class="relative w-full h-full">
@@ -93,11 +108,10 @@
               class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
             <div
               class="absolute inset-0 bg-vsta-teal/80 flex items-center justify-center p-4 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <h3 class="text-vsta-dark-blue font-bold text-xl">{{ project.details?.client }}</h3>
+              <h3 class="text-vsta-dark-blue font-bold text-xl">عرض المعرض</h3>
             </div>
           </div>
         </button>
-
         }
         <!-- ============================================= -->
         <!-- END: نهاية الشرط -->
@@ -109,7 +123,6 @@
     </div>
   </section>
   <!-- ===== END: Portfolio Section ===== -->
-
 
 
   <!-- =============================== -->

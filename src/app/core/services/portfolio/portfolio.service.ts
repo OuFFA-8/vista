@@ -9,6 +9,7 @@ export interface Project {
   id: string;
   media: MediaItem[];
   coverImage?: string;
+  siteUrl?: string;
   layout?: 'grid' | 'default' | 'focus-grid';
   details?: { partner: string; client: string; type: string; };
 }
@@ -133,26 +134,30 @@ export class PortfolioService {
       portfolio: [
         {
           id: 'website-project-1',
-          media: [{ type: 'image', src: '/images/مواقع/الامبااط -١-.webp' }],
+          media: [],
           coverImage: '/images/مواقع/الامبااط -١-.webp' ,
+          siteUrl: 'https://ambatt.com.sa/', 
           details: { partner: 'العميل', client: 'الامبااط', type: 'تطوير موقع' }
         },
         {
           id: 'website-project-1',
-          media: [{ type: 'image', src: '/images/مواقع/الزامل والخراشي -٢-.webp' }],
+          media: [],
           coverImage: '/images/مواقع/الزامل والخراشي -٢-.webp'  ,
+          siteUrl: 'https://elzamel.vercel.app/home',
           details: { partner: 'العميل', client: 'الزامل والخراشي', type: 'تطوير موقع' }
         },
         {
           id: 'website-project-1',
-          media: [{ type: 'image', src: '/images/مواقع/الزاملية -١.webp' }],
+          media: [],
           coverImage: '/images/مواقع/الزاملية -١.webp'  ,
+          siteUrl: 'https://alzamiliah.com/ar',
           details: { partner: 'العميل', client: 'الزاملية', type: 'تطوير موقع' }
         },
         {
           id: 'website-project-1',
-          media: [{ type: 'image', src: '/images/مواقع/دار العقارية ة.webp' }],
+          media: [],
           coverImage: '/images/مواقع/دار العقارية ة.webp' ,
+          siteUrl: 'https://daralaqaria.com/ar',
           details: { partner: 'العميل', client: 'دار العقارية', type: 'تطوير موقع' }
         },
       ]
