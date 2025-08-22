@@ -1,24 +1,35 @@
-<!-- استخدم @if لعرض الـ Lightbox فقط عندما يكون مفتوحًا -->
 @if (lightboxService.isOpen()) {
-  <!-- 1. الخلفية المعتمة، عند الضغط عليها يتم الإغلاق -->
-  <div (click)="closeLightbox()" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[999] flex items-center justify-center lightbox-fade-in">
-    
-    <!-- 2. حاوية الفيديو (تمنع إغلاق الـ Lightbox عند الضغط على الفيديو نفسه) -->
-    <div (click)="$event.stopPropagation()" class="relative w-full max-w-4xl p-4">
-      
-      <!-- 3. زر الإغلاق -->
-      <button (click)="closeLightbox()" class="absolute -top-2 -right-2 z-10 bg-white text-black w-10 h-10 rounded-full text-2xl flex items-center justify-center hover:scale-110 transition-transform">
-        &times;
-      </button>
+<div (click)="closeLightbox()"
+  class="fixed inset-0 bg-black/90 backdrop-blur-sm z-[999] flex items-center justify-center lightbox-fade-in p-4">
 
-      <!-- 4. مشغل الفيديو -->
-      @if(lightboxService.activeMedia(); as media) {
-        <div class="aspect-video">
-          <!-- الفيديو هنا يعمل تلقائيًا ويحتوي على أزرار تحكم -->
-          <video [src]="media.src" class="w-full h-full rounded-lg" controls autoplay playsinline></video>
-        </div>
+  <!-- زر الإغلاق -->
+  <button (click)="closeLightbox()"
+    class="absolute top-4 right-4 z-20 bg-white/20 text-white w-10 h-10 rounded-full text-2xl flex items-center justify-center hover:bg-white/30 transition">
+    &times;
+  </button>
+
+  <!-- أزرار التنقل -->
+  @if (lightboxService.activeMediaList().length > 1) {
+  <button (click)="prevItem(); $event.stopPropagation()"
+    class="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white/20 text-white w-12 h-12 rounded-full text-2xl flex items-center justify-center hover:bg-white/30 transition">
+    <i class="fa-solid fa-chevron-left"></i>
+  </button>
+  <button (click)="nextItem(); $event.stopPropagation()"
+    class="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white/20 text-white w-12 h-12 rounded-full text-2xl flex items-center justify-center hover:bg-white/30 transition">
+    <i class="fa-solid fa-chevron-right"></i>
+  </button>
+  }
+
+  <div (click)="$event.stopPropagation()" class="relative w-full max-w-6xl">
+    @if(currentItem(); as item) {
+    <div class="aspect-video">
+      @if (item.type === 'video') {
+      <video [src]="item.src" class="w-full h-full rounded-lg" controls autoplay playsinline></video>
+      } @else {
+      <img [src]="item.src" alt="Lightbox image" class="w-full h-full object-contain rounded-lg">
       }
     </div>
-
+    }
   </div>
+</div>
 }

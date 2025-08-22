@@ -9,7 +9,7 @@ export interface Project {
   id: string;
   media: MediaItem[];
   coverImage?: string;
-  layout?: 'grid' | 'default' | 'focus-grid'; 
+  layout?: 'grid' | 'default' | 'focus-grid';
   details?: { partner: string; client: string; type: string; };
 }
 
@@ -32,6 +32,8 @@ export class PortfolioService {
         {
           id: 'graphics-project-1',
           layout: 'focus-grid',
+          coverImage: '/images/تربس/تصاميم تربس_8.webp',
+
           media: [
             { type: 'image', src: '/images/تربس/تصاميم تربس_8.webp' },
             { type: 'image', src: '/images/تربس/تصاميم تربس_4.webp' },
@@ -40,11 +42,13 @@ export class PortfolioService {
             { type: 'image', src: '/images/تربس/تصاميم تربس - رمضان_12 copy 4.webp' },
             { type: 'image', src: '/images/تربس/تصاميم تربس - رمضان_12 copy 18.webp' },
             { type: 'image', src: '/images/تربس/تصاميم تربس - رمضان_12 copy 17.webp' }
-          ],
+          ], details: { partner: 'شركة ألفا', client: 'تربس', type: 'تصميم هوية بصرية' }
         },
         {
           id: 'graphics-project-2',
           layout: 'focus-grid',
+          coverImage: '/images/الامباط العقارية/2 copy 10.webp ',
+
           media: [
             { type: 'image', src: '/images/الامباط العقارية/2 copy 10.webp ' },
             { type: 'image', src: '/images/الامباط العقارية/2 copy 4.webp ' },
@@ -54,11 +58,13 @@ export class PortfolioService {
             { type: 'image', src: '/images/الامباط العقارية/2 copy 14.webp ' },
             { type: 'image', src: '/images/الامباط العقارية/2 copy 16.webp ' }
           ],
-          details: { partner: 'شركة ألفا', client: 'نمو', type: 'تصميم هوية بصرية' }
+          details: { partner: 'شركة ألفا', client: 'الامباط العقارية', type: 'تصميم هوية بصرية' }
         },
         {
           id: 'graphics-project-3',
           layout: 'focus-grid',
+          coverImage: '/images/الريادة قروب/1.webp ',
+
           media: [
             { type: 'image', src: '/images/الريادة قروب/1.webp ' },
             { type: 'image', src: '/images/الريادة قروب/2.webp ' },
@@ -68,11 +74,13 @@ export class PortfolioService {
             { type: 'image', src: '/images/الريادة قروب/11.webp ' },
             { type: 'image', src: '/images/الريادة قروب/12.webp ' }
           ],
-          details: { partner: 'شركة ألفا', client: 'نمو', type: 'تصميم هوية بصرية' }
+          details: { partner: 'شركة ألفا', client: 'الريادة قروب', type: 'تصميم هوية بصرية' }
         },
         {
           id: 'graphics-project-4',
           layout: 'focus-grid',
+          coverImage: '/images/معرض كاش اكسبو/- ٢ - معرض copy 2.webp',
+
           media: [
             { type: 'image', src: '/images/معرض كاش اكسبو/- ٢ - معرض copy 2.webp' },
             { type: 'image', src: '/images/معرض كاش اكسبو/- ٣ - ختام ناجح لمعرض كاش إكسبو.webp' },
@@ -82,11 +90,13 @@ export class PortfolioService {
             { type: 'image', src: '/images/معرض كاش اكسبو/٨.webp' },
             { type: 'image', src: '/images/معرض كاش اكسبو/٩.webp' }
           ],
-          details: { partner: 'شركة ألفا', client: 'نمو', type: 'تصميم هوية بصرية' }
+          details: { partner: 'شركة ألفا', client: 'معرض كاش اكسبو', type: 'تصميم هوية بصرية' }
         },
         {
           id: 'graphics-project-5',
           layout: 'focus-grid',
+          coverImage: '/images/مدينة الملك عبدالله/انفو جرافيك 3 copy.webp',
+
           media: [
             { type: 'image', src: '/images/مدينة الملك عبدالله/انفو جرافيك 3 copy.webp' },
             { type: 'image', src: '/images/مدينة الملك عبدالله/تصميم الاستدامة copy 2.webp ' },
@@ -96,11 +106,13 @@ export class PortfolioService {
             { type: 'image', src: '/images/مدينة الملك عبدالله/موشن جرافيك copy 2.webp' },
             { type: 'image', src: '/images/مدينة الملك عبدالله/يوم الشباب-1.webp' }
           ],
-          details: { partner: 'شركة ألفا', client: 'نمو', type: 'تصميم هوية بصرية' }
+          details: { partner: 'شركة ألفا', client: 'مدينة الملك عبدالله', type: 'تصميم هوية بصرية' }
         },
         {
           id: 'graphics-project-6',
           layout: 'focus-grid',
+          coverImage: '/images/دانكن/Artboard 1 (1).webp',
+
           media: [
             { type: 'image', src: '/images/دانكن/Artboard 1 (1).webp' },
             { type: 'image', src: '/images/دانكن/Artboard 1.webp' },
@@ -110,33 +122,38 @@ export class PortfolioService {
             { type: 'image', src: '/images/دانكن/صباحات دانكن.webp' },
             { type: 'image', src: '/images/دانكن/نفهم جوك.webp' }
           ],
-          details: { partner: 'شركة ألفا', client: 'نمو', type: 'تصميم هوية بصرية' }
+          details: { partner: 'شركة ألفا', client: 'دانكن', type: 'تصميم هوية بصرية' }
         }
       ]
     },
     {
       title: 'ويب سايت',
       linkText: 'اضغط للمعاينة',
+
       portfolio: [
         {
           id: 'website-project-1',
           media: [{ type: 'image', src: '/images/مواقع/الامبااط -١-.webp' }],
-          details: { partner: 'العميل', client: 'المشروع', type: 'تطوير موقع' }
+          coverImage: '/images/مواقع/الامبااط -١-.webp' ,
+          details: { partner: 'العميل', client: 'الامبااط', type: 'تطوير موقع' }
         },
         {
           id: 'website-project-1',
           media: [{ type: 'image', src: '/images/مواقع/الزامل والخراشي -٢-.webp' }],
-          details: { partner: 'العميل', client: 'المشروع', type: 'تطوير موقع' }
+          coverImage: '/images/مواقع/الزامل والخراشي -٢-.webp'  ,
+          details: { partner: 'العميل', client: 'الزامل والخراشي', type: 'تطوير موقع' }
         },
         {
           id: 'website-project-1',
           media: [{ type: 'image', src: '/images/مواقع/الزاملية -١.webp' }],
-          details: { partner: 'العميل', client: 'المشروع', type: 'تطوير موقع' }
+          coverImage: '/images/مواقع/الزاملية -١.webp'  ,
+          details: { partner: 'العميل', client: 'الزاملية', type: 'تطوير موقع' }
         },
         {
           id: 'website-project-1',
           media: [{ type: 'image', src: '/images/مواقع/دار العقارية ة.webp' }],
-          details: { partner: 'العميل', client: 'المشروع', type: 'تطوير موقع' }
+          coverImage: '/images/مواقع/دار العقارية ة.webp' ,
+          details: { partner: 'العميل', client: 'دار العقارية', type: 'تطوير موقع' }
         },
       ]
     },

@@ -1,7 +1,8 @@
+import { LightboxService } from './../../core/services/lightbox/lightbox.service';
 import { Component, ElementRef, ViewChild, signal, inject, OnInit, AfterViewInit, QueryList, ViewChildren, HostListener, PLATFORM_ID } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
-import { PortfolioService, Service } from './../../core/services/portfolio/portfolio.service';
+import { MediaItem, PortfolioService, Project, Service } from './../../core/services/portfolio/portfolio.service';
 import { ScrollSpyService } from '../../core/services/scroll-spy/scroll-spy.service';
 import { isPlatformBrowser } from '@angular/common';
 
@@ -21,6 +22,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   private portfolioService = inject(PortfolioService);
   private scrollSpyService = inject(ScrollSpyService);
   private platformId = inject(PLATFORM_ID);
+  private lightboxService = inject(LightboxService);
 
   services: Service[] = [];
   activeTab = signal<Service | null>(null);
@@ -85,6 +87,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
   changeTab(service: Service): void {
     this.activeTab.set(service);
     this.activeServiceCard.set(null);
+  }
+
+  openVideoInLightbox(item: MediaItem): void {
+    this.lightboxService.open([item]);
+  }
+
+  openGalleryInLightbox(project: Project): void {
+    this.lightboxService.open(project.media);
   }
 
   scrollRight(): void { this.clientsScroller.nativeElement.scrollBy({ left: 300, behavior: 'smooth' }); }
