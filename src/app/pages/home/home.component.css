@@ -40,6 +40,15 @@
   @apply bg-vsta-dark-blue;
 }
 
+.video-thumb-btn {
+  @apply bg-gray-200/50 hover:bg-gray-200;
+}
+
+/* تنسيق زر الفيديو النشط */
+.video-thumb-btn.active-video-thumb {
+  @apply bg-white ring-2 ring-vsta-teal shadow-lg;
+}
+
 
 /* ============================================= */
 /* ===== Animation Styling ===== */

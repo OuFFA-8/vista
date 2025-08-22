@@ -135,28 +135,28 @@ export class PortfolioService {
         {
           id: 'website-project-1',
           media: [],
-          coverImage: '/images/مواقع/الامبااط -١-.webp' ,
-          siteUrl: 'https://ambatt.com.sa/', 
+          coverImage: '/images/مواقع/الامبااط -١-.webp',
+          siteUrl: 'https://ambatt.com.sa/',
           details: { partner: 'العميل', client: 'الامبااط', type: 'تطوير موقع' }
         },
         {
           id: 'website-project-1',
           media: [],
-          coverImage: '/images/مواقع/الزامل والخراشي -٢-.webp'  ,
+          coverImage: '/images/مواقع/الزامل والخراشي -٢-.webp',
           siteUrl: 'https://elzamel.vercel.app/home',
           details: { partner: 'العميل', client: 'الزامل والخراشي', type: 'تطوير موقع' }
         },
         {
           id: 'website-project-1',
           media: [],
-          coverImage: '/images/مواقع/الزاملية -١.webp'  ,
+          coverImage: '/images/مواقع/الزاملية -١.webp',
           siteUrl: 'https://alzamiliah.com/ar',
           details: { partner: 'العميل', client: 'الزاملية', type: 'تطوير موقع' }
         },
         {
           id: 'website-project-1',
           media: [],
-          coverImage: '/images/مواقع/دار العقارية ة.webp' ,
+          coverImage: '/images/مواقع/دار العقارية ة.webp',
           siteUrl: 'https://daralaqaria.com/ar',
           details: { partner: 'العميل', client: 'دار العقارية', type: 'تطوير موقع' }
         },
@@ -169,24 +169,25 @@ export class PortfolioService {
         {
           id: 'video-project-1',
           media: [
-            { type: 'video', src: '/images/إنتاج إعلامي/رواد جادة الابتكار، فيديو الرياض.mp4' },
-            { type: 'video', src: '/images/إنتاج إعلامي/رواد جادة الابتكار، فيديو معرض الإطلاق 1.mp4' },
-            { type: 'video', src: '/images/إنتاج إعلامي/هاكثون المدينة - المسارات 4.mp4' },
-            { type: 'video', src: '/images/إنتاج إعلامي/جمعية تحفيظ القران المدينة المنورة Full Modify (1).mp4' },
-          ],
-          // --- تم إصلاح هذا الجزء ---
+            { type: 'video', src: '/images/إنتاج إعلامي/رواد جادة الابتكار، فيديو الرياض.mp4' }],
           details: { partner: 'استديو فيستا', client: 'خاص', type: 'فيديوهات ترويجية' }
         },
         {
-          id: 'video-project-1',
-          media: [
-            { type: 'video', src: '/images/إنتاج إعلامي/مجلس الجمعيات الاهلية مؤثرات.mp4' },
-            { type: 'video', src: '/images/إنتاج إعلامي/كفالة يتيم جاهز (1).mp4' },
-            { type: 'video', src: '/images/إنتاج إعلامي/امور الحياة03.mp4' },
-            { type: 'video', src: '/images/إنتاج إعلامي/الدخول لموقع الشامل.mp4' },
-          ],
+          id: 'video-project-2',
+          media: [{ type: 'video', src: '/images/إنتاج إعلامي/كفالة يتيم جاهز (1).mp4' }],
           details: { partner: 'استديو فيستا', client: 'خاص', type: 'فيديوهات ترويجية' }
-        }
+        },
+        {
+          id: 'video-project-3',
+          media: [{ type: 'video', src: '/images/إنتاج إعلامي/امور الحياة03.mp4' }],
+          details: { partner: 'استديو فيستا', client: 'خاص', type: 'فيديوهات ترويجية' }
+        },
+        {
+          id: 'video-project-4',
+          media: [{ type: 'video', src: '/images/إنتاج إعلامي/الدخول لموقع الشامل.mp4' }],
+          details: { partner: 'استديو فيستا', client: 'خاص', type: 'فيديوهات ترويجية' }
+        },
+
       ]
     },
     {

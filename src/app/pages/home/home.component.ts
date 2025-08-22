@@ -27,6 +27,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   services: Service[] = [];
   activeTab = signal<Service | null>(null);
   activeServiceCard = signal<Service | null>(null);
+  activeVideoItem = signal<Project | null>(null);
 
 
   @ViewChild('clientsScroller') clientsScroller!: ElementRef;
@@ -87,6 +88,18 @@ export class HomeComponent implements OnInit, AfterViewInit {
   changeTab(service: Service): void {
     this.activeTab.set(service);
     this.activeServiceCard.set(null);
+
+    // إذا كان التاب الجديد هو "إنتاج اعلامي"، قم بتعيين الفيديو الأول كنشط
+    if (service.title === 'إنتاج اعلامي' && service.portfolio && service.portfolio.length > 0) {
+      this.activeVideoItem.set(service.portfolio[0]);
+    } else {
+      this.activeVideoItem.set(null); // قم بإلغاء التعيين للخدمات الأخرى
+    }
+  }
+
+  // --- 3. دالة جديدة لتغيير الفيديو النشط ---
+  setActiveVideo(project: Project): void {
+    this.activeVideoItem.set(project);
   }
 
   openVideoInLightbox(item: MediaItem): void {
