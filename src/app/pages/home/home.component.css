@@ -1,17 +1,51 @@
+/* ============================================= */
+/* ===== Tabs Styling ===== */
+/* ============================================= */
 
+/* تنسيق الزر العادي (غير النشط) */
 .tab-btn {
-  @apply bg-gray-200 text-gray-600;
+  @apply bg-gray-200 text-gray-700 font-semibold;
 }
 
+/* تنسيق الزر عند مرور الماوس فوقه */
 .tab-btn:hover {
-  @apply bg-gray-200;
+  @apply bg-gray-300;
 }
 
+/* 
+  تنسيق الزر النشط 
+  - خلفية بلون vsta-dark-blue
+  - لون نص أبيض
+*/
 .tab-btn.active-tab {
-  @apply bg-vsta-teal text-white; 
+  @apply bg-vsta-dark-blue text-white;
 }
 
 
+/* ============================================= */
+/* ===== Service Cards Styling ===== */
+/* ============================================= */
+
+/* تنسيق بطاقة الخدمة عندما تكون نشطة */
+.active-service {
+  @apply bg-vsta-teal text-vsta-dark-blue;
+}
+
+.active-service i,
+.active-service span {
+  @apply text-vsta-dark-blue;
+}
+
+.active-service .w-16 {
+  @apply bg-vsta-dark-blue;
+}
+
+
+/* ============================================= */
+/* ===== Animation Styling ===== */
+/* ============================================= */
+
+/* تأثير ظهور شبكة البورتفوليو */
 .portfolio-grid {
   animation: fadeIn 0.5s ease-in-out;
 }
@@ -21,7 +55,6 @@
     opacity: 0;
     transform: translateY(20px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);

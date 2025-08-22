@@ -1,12 +1,10 @@
 import { Component, ElementRef, ViewChild, signal, inject, OnInit, AfterViewInit, QueryList, ViewChildren, HostListener, PLATFORM_ID } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
-// استيراد الواجهات والخدمات
 import { PortfolioService, Service } from './../../core/services/portfolio/portfolio.service';
 import { ScrollSpyService } from '../../core/services/scroll-spy/scroll-spy.service';
 import { isPlatformBrowser } from '@angular/common';
 
-// --- 1. تمت إضافة هذه الواجهة لحل المشكلة ---
 interface Client {
   src: string;
   alt: string;
@@ -20,20 +18,19 @@ interface Client {
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit, AfterViewInit {
-  // حقن الخدمات
   private portfolioService = inject(PortfolioService);
   private scrollSpyService = inject(ScrollSpyService);
   private platformId = inject(PLATFORM_ID);
 
-  // الخصائص والـ Signals
   services: Service[] = [];
   activeTab = signal<Service | null>(null);
+  activeServiceCard = signal<Service | null>(null);
+
 
   @ViewChild('clientsScroller') clientsScroller!: ElementRef;
   @ViewChildren('scrollSection') sections!: QueryList<ElementRef>;
   private navbarHeight = 100;
 
-  // --- 2. تم تحديد نوع المصفوفة هنا ---
   clients: Client[] = [
     { src: '/images/عملائنا/1.png', alt: 'Client Logo 1' }, { src: '/images/عملائنا/2.png', alt: 'Client Logo 2' },
     { src: '/images/عملائنا/3.png', alt: 'Client Logo 3' }, { src: '/images/عملائنا/4.png', alt: 'Client Logo 4' },
@@ -45,17 +42,27 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   constructor() { }
 
-ngOnInit(): void {
-  const allServices = this.portfolioService.getServices();
-  
-  // 1. فلترة الخدمات فقط، بدون أي عكس للترتيب
-  this.services = allServices.filter(s => s.portfolio && s.portfolio.length > 0); 
+  ngOnInit(): void {
+    const allServices = this.portfolioService.getServices();
+    let servicesWithPortfolio = allServices.filter(s => s.portfolio && s.portfolio.length > 0);
 
-  // 2. الآن، أول عنصر في المصفوفة هو "تصاميم جرافيك" وسيتم تعيينه كالتاب النشط
-  if (this.services.length > 0) {
-    this.activeTab.set(this.services[0]);
+    const graphicDesignService = servicesWithPortfolio.find(s => s.title === 'تصاميم جرافيك');
+
+    if (graphicDesignService) {
+      const otherServices = servicesWithPortfolio.filter(s => s.title !== 'تصاميم جرافيك');
+
+      this.services = [graphicDesignService, ...otherServices];
+
+      this.activeTab.set(graphicDesignService);
+      this.activeServiceCard.set(graphicDesignService);
+    } else {
+      this.services = servicesWithPortfolio;
+      if (this.services.length > 0) {
+        this.activeTab.set(this.services[0]);
+        this.activeServiceCard.set(this.services[0]);
+      }
+    }
   }
-}
 
 
   ngAfterViewInit(): void {
@@ -64,12 +71,22 @@ ngOnInit(): void {
     }
   }
 
-  // دالة لتغيير التاب النشط
-  changeTab(service: Service): void {
+  selectServiceAndScroll(service: Service): void {
+    this.activeServiceCard.set(service);
     this.activeTab.set(service);
+    if (isPlatformBrowser(this.platformId)) {
+      const portfolioSection = document.getElementById('portfolio');
+      if (portfolioSection) {
+        portfolioSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
   }
 
-  // دوال التحكم في سلايدر العملاء والـ Scroll Spy
+  changeTab(service: Service): void {
+    this.activeTab.set(service);
+    this.activeServiceCard.set(null);
+  }
+
   scrollRight(): void { this.clientsScroller.nativeElement.scrollBy({ left: 300, behavior: 'smooth' }); }
   scrollLeft(): void { this.clientsScroller.nativeElement.scrollBy({ left: -300, behavior: 'smooth' }); }
 
