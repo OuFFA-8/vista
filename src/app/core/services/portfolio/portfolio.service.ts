@@ -191,7 +191,7 @@ export class PortfolioService {
       ]
     },
     {
-      title: 'براندق',
+      title: 'علامات تجارية',
       linkText: 'اضغط للمعاينة',
       portfolio: [
         {
