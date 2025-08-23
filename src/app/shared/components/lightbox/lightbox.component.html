@@ -1,35 +1,48 @@
 @if (lightboxService.isOpen()) {
+<!-- الحاوية الرئيسية (بدون padding أفقي على الموبايل) -->
 <div (click)="closeLightbox()"
-  class="fixed inset-0 bg-black/90 backdrop-blur-sm z-[999] flex items-center justify-center lightbox-fade-in p-4">
+  class="fixed inset-0 bg-black/90 backdrop-blur-sm z-[999] flex items-center justify-center lightbox-fade-in py-1 px-0 sm:p-4">
 
   <!-- زر الإغلاق -->
   <button (click)="closeLightbox()"
-    class="absolute top-4 right-4 z-20 bg-white/20 text-white w-10 h-10 rounded-full text-2xl flex items-center justify-center hover:bg-white/30 transition">
+    class="absolute top-2 right-2 z-20 bg-white/20 text-white w-8 h-8 rounded-full text-xl flex items-center justify-center hover:bg-white/30 transition">
     &times;
   </button>
 
-  <!-- أزرار التنقل -->
+  <!-- أزرار التنقل (بحجم متجاوب) -->
   @if (lightboxService.activeMediaList().length > 1) {
   <button (click)="prevItem(); $event.stopPropagation()"
-    class="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white/20 text-white w-12 h-12 rounded-full text-2xl flex items-center justify-center hover:bg-white/30 transition">
+    class="absolute left-2 top-1/2 -translate-y-1/2 z-20 bg-white/20 text-white w-10 h-10 sm:w-12 sm:h-12 rounded-full text-xl sm:text-2xl flex items-center justify-center hover:bg-white/30 transition">
     <i class="fa-solid fa-chevron-left"></i>
   </button>
   <button (click)="nextItem(); $event.stopPropagation()"
-    class="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white/20 text-white w-12 h-12 rounded-full text-2xl flex items-center justify-center hover:bg-white/30 transition">
+    class="absolute right-2 top-1/2 -translate-y-1/2 z-20 bg-white/20 text-white w-10 h-10 sm:w-12 sm:h-12 rounded-full text-xl sm:text-2xl flex items-center justify-center hover:bg-white/30 transition">
     <i class="fa-solid fa-chevron-right"></i>
   </button>
   }
 
-  <div (click)="$event.stopPropagation()" class="relative w-full max-w-6xl">
+  <!-- ============================================= -->
+  <!-- START: التعديل الرئيسي هنا -->
+  <!-- ============================================= -->
+  <!-- 
+      - w-screen: تجبر العنصر على أخذ 100% من عرض الشاشة (viewport width)
+      - sm:w-full: يعود إلى السلوك الطبيعي على الشاشات الأكبر
+      - max-w-6xl: ما زال يعمل على الشاشات الكبيرة
+    -->
+  <div (click)="$event.stopPropagation()" class="relative w-screen sm:w-full max-w-6xl">
     @if(currentItem(); as item) {
     <div class="aspect-video">
       @if (item.type === 'video') {
-      <video [src]="item.src" class="w-full h-full rounded-lg" controls autoplay playsinline></video>
+      <video [src]="item.src" class="w-full h-full" controls autoplay playsinline></video>
       } @else {
-      <img [src]="item.src" alt="Lightbox image" class="w-full h-full object-contain rounded-lg">
+      <!-- تم إزالة rounded-lg من الصورة لتظهر بحواف حادة على الموبايل -->
+      <img [src]="item.src" alt="Lightbox image" class="w-full h-full object-contain sm:rounded-lg">
       }
     </div>
     }
   </div>
+  <!-- ============================================= -->
+  <!-- END: نهاية التعديل -->
+  <!-- ============================================= -->
 </div>
 }
