@@ -9,9 +9,9 @@ module.exports = {
         sans: ['GE SS Two', 'Cairo', 'sans-serif'],
       },
       colors: {
-        'vsta-dark-blue': '#0D0D1F',
-        'vsta-purple': '#1A1A3D',
-        'vsta-teal': '#2CE6A7',
+        'vsta-dark-blue': '#111111',
+        'vsta-purple': '#6b43f4',
+        'vsta-teal': '#40FFBA',
       }
     },
   },
