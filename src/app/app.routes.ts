@@ -10,19 +10,19 @@ export const routes: Routes = [
         path: 'home',
         loadComponent: () =>
             import('./pages/home/home.component').then(m => m.HomeComponent),
-        title: 'الصفحة الرئيسية'
+        title: 'Vsta | الصفحة الرئيسية'
     },
     {
         path: 'portfolio/:id',
         loadComponent: () =>
             import('./pages/project-detail/project-detail.component').then(m => m.ProjectDetailComponent),
-        title: 'Not Found'
+        title: 'Vsta | علامات تجارية'
     },
     {
         path: '**',
         loadComponent: () =>
             import('./pages/notfound/notfound.component').then(m => m.NotfoundComponent),
-        title: 'Not Found'
+        title: 'Vsta | الصفحة غير موجودة'
     },
 
 ];
