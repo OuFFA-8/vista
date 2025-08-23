@@ -37,18 +37,17 @@
             تواصل معنا
           </a>
         </li>
-        <li>
-          <a (click)="closeMobileMenuOnClick()" routerLink="/home" fragment="clients"
-            [class.active-link]="activeSectionId() === 'clients'"
-            class="block py-2 px-3 md:p-0 rounded text-lg transition-colors duration-300 hover:text-vsta-teal">
-            عملنا معهم
-          </a>
-        </li>
+        
         <li>
           <a (click)="closeMobileMenuOnClick()" routerLink="/home" fragment="services"
             [class.active-link]="activeSectionId() === 'services'"
             class="block py-2 px-3 md:p-0 rounded text-lg transition-colors duration-300 hover:text-vsta-teal">
             أعمالنا
+          </a>
+        </li>
+        <li>
+          <a class="block py-2 px-3 md:p-0 rounded text-lg transition-colors duration-300 hover:text-vsta-teal">
+            من نحن
           </a>
         </li>
         <li>
