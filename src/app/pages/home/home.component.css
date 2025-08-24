@@ -49,6 +49,10 @@
   @apply bg-white ring-2 ring-vsta-teal shadow-lg;
 }
 
+.service-card {
+  opacity: 0;
+  transform: translateY(50px);
+}
 
 /* ============================================= */
 /* ===== Animation Styling ===== */

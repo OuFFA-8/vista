@@ -1,0 +1,18 @@
+<!-- حاوية شاشة التحميل -->
+<div class="preloader fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-white">
+  
+  <!-- حاوية الشعار (لتأثير الامتلاء) -->
+  <div class="logo-container relative w-48 h-auto">
+    <!-- 1. الشعار الملون (الطبقة السفلية) -->
+    <img src="/images/vsta-logo-color.svg" alt="Vsta Logo" class="w-full h-auto">
+    
+    <!-- 2. الشعار الأبيض (القناع المتحرك - الطبقة العلوية) -->
+    <div class="logo-mask absolute inset-0 w-full h-full overflow-hidden">
+      <img src="/images/vsta-logo-white.svg" alt="Vsta Logo Mask" class="w-full h-auto">
+    </div>
+  </div>
+
+  <!-- 3. العداد الرقمي -->
+  <p class="counter mt-4 text-2xl font-bold text-vsta-dark-blue">0%</p>
+
+</div>

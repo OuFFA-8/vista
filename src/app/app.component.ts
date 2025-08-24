@@ -6,6 +6,7 @@ import { LightboxComponent } from "./shared/components/lightbox/lightbox.compone
 import { ContactSectionComponent } from "./shared/components/contact-section/contact-section.component";
 import { ScrollSpyService } from './core/services/scroll-spy/scroll-spy.service';
 import { isPlatformBrowser } from '@angular/common';
+import { PreloaderComponent } from "./shared/components/preloader/preloader.component";
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,9 @@ import { isPlatformBrowser } from '@angular/common';
     RouterOutlet,
     NavbarComponent,
     LightboxComponent,
-    ContactSectionComponent,],
+    ContactSectionComponent,
+    PreloaderComponent
+],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

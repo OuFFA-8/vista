@@ -13,15 +13,19 @@
     <!-- <div class="absolute bottom-0 left-0 w-full h-[200px] bg-repeat opacity-100 "
       style="background-image: url('/images/باترن\ -\ ١.webp'); background-size: cover; ">
     </div> -->
+
     <!-- محتوى الـ Hero -->
-    <div class="relative z-10 text-center px-4">
-      <h1 class="font-black text-5xl md:text-7xl lg:text-8xl leading-tight">
-        إبداع، <span class="text-vsta-teal">تأثير،</span> انتشار
-      </h1>
-      <p class="mt-6 text-lg md:text-xl max-w-3xl mx-auto text-gray-300">
-        نحن نؤمن بأن كل قصة تستحق أن تروى بشكل يلهم ويبهج ويثير الفضول. دعنا نساعدك في تحقيق ذلك.
-      </p>
-    </div>
+  <div class="relative z-10 text-center px-4">
+    <h1 class="font-black text-5xl md:text-7xl lg:text-8xl leading-tight">
+      <span class="hero-word inline-block">انتشـار</span>
+       <span class="hero-word inline-block px-4 text-vsta-teal">تــأثـير</span>
+      <span class="hero-word inline-block">إبـداع</span>
+    </h1>
+    <!-- 2. أضفنا كلاس "hero-paragraph" للفقرة -->
+    <p class="hero-paragraph mt-6 text-lg md:text-xl max-w-3xl mx-auto text-gray-300">
+      نحن نؤمن بأن كل قصة تستحق أن تروى بشكل يلهم ويبهج ويثير الفضول. دعنا نساعدك في تحقيق ذلك.
+    </p>
+  </div>
   </section>
 
 
@@ -32,7 +36,7 @@
 
         @for (service of services; track service) {
         <button (click)="selectServiceAndScroll(service)" [class.active-service]="activeServiceCard() === service"
-          class="group relative text-white rounded-3xl p-6 md:p-8 flex flex-col justify-center items-center text-center transform hover:-translate-y-2 transition-all duration-300 shadow-2xl min-h-[250px] md:min-h-[280px] bg-vsta-purple">
+          class="service-card group relative text-white rounded-3xl p-6 md:p-8 flex flex-col justify-center items-center text-center transform hover:-translate-y-2 transition-all duration-300 shadow-2xl min-h-[250px] md:min-h-[280px] bg-vsta-purple">
 
           <i
             class="fa-solid fa-arrow-up absolute top-8 right-8 text-vsta-teal text-2xl transition-transform duration-300 rotate-45 group-hover:scale-125 group-hover:rotate-[40deg]"></i>
@@ -165,7 +169,7 @@
       <h2 class="text-4xl font-bold text-end mb-12">عملنا معهم</h2>
 
       <!-- حاوية السلايدر -->
-      <div class="relative bg-white rounded-full shadow-lg p-4 flex items-center">
+      <div class="clients-slider-container relative bg-white rounded-full shadow-lg p-4 flex items-center">
 
         <!-- زر السهم لليسار -->
         <button (click)="scrollLeft()"
