@@ -1,4 +1,3 @@
-import { ProjectDetailComponent } from './pages/project-detail/project-detail.component';
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
@@ -17,6 +16,12 @@ export const routes: Routes = [
         loadComponent: () =>
             import('./pages/project-detail/project-detail.component').then(m => m.ProjectDetailComponent),
         title: 'Vsta | علامات تجارية'
+    },
+    {
+        path: 'about',
+        loadComponent: () =>
+            import('./pages/about/about.component').then(m => m.AboutComponent),
+        title: 'Vsta | من نحن'
     },
     {
         path: '**',

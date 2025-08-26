@@ -12,6 +12,15 @@ module.exports = {
         'vsta-dark-blue': '#111111',
         'vsta-purple': '#6b43f4',
         'vsta-teal': '#40FFBA',
+      },
+      animation: {
+        'infinite-scroll': 'infinite-scroll 40s linear infinite',
+      },
+      keyframes: {
+        'infinite-scroll': {
+          from: { transform: 'translateX(0)' },
+          to: { transform: 'translateX(-100%)' },
+        }
       }
     },
   },

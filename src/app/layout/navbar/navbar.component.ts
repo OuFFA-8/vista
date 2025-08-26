@@ -29,6 +29,8 @@ export class NavbarComponent implements AfterViewInit {
   private readonly isScrolled = signal(false);
   private readonly isHomePage = signal(this.checkIsHomePage(this.router.url));
   activeSectionId = this.scrollSpyService.activeSectionId;
+  
+  // جعل الـ signal متاحًا للقالب
 
   // Computed signal: سيقوم بإظهار الخلفية إذا لم نكن في الصفحة الرئيسية، أو إذا قمنا بالتمرير لأسفل
   readonly showBackground = computed(() => !this.isHomePage() || this.isScrolled());
@@ -46,7 +48,7 @@ export class NavbarComponent implements AfterViewInit {
       this.isHomePage.set(isHome);
       // إعادة تعيين حالة التمرير عند الانتقال إلى الصفحة الرئيسية
       if (isHome) {
-        this.handleScroll(); 
+        this.handleScroll();
       }
     });
   }
@@ -58,15 +60,15 @@ export class NavbarComponent implements AfterViewInit {
   // 1. تم تصحيح منطق الدالة
   private checkIsHomePage(url: string): boolean {
     // فقط الصفحة الرئيسية (/) أو (/home) هي التي يبدأ فيها الشريط شفافًا
-    return url === '/' || url === '/home' || url.startsWith('/portfolio/');
+    return url === '/' || url === '/home' || url.startsWith('/portfolio/') || url === '/about';
   }
-  
+
   // 2. تم دمج onScroll و handleScroll
   @HostListener('window:scroll')
   private handleScroll(): void {
     if (isPlatformBrowser(this.platformId)) {
       // يمكنك تغيير القيمة 50 لتحديد متى تظهر الخلفية
-      const scrolled = window.scrollY > 50; 
+      const scrolled = window.scrollY > 50;
       if (this.isScrolled() !== scrolled) {
         this.isScrolled.set(scrolled);
       }

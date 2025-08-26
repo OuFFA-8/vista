@@ -20,6 +20,11 @@ export interface Service {
   portfolio?: Project[];
 }
 
+export interface Client {
+  src: string;
+  alt: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -249,7 +254,20 @@ export class PortfolioService {
     }
   ];
 
+  private clients = [
+    { src: '/images/عملائنا/1.png', alt: 'Client Logo 1' }, { src: '/images/عملائنا/2.png', alt: 'Client Logo 2' },
+    { src: '/images/عملائنا/3.png', alt: 'Client Logo 3' }, { src: '/images/عملائنا/4.png', alt: 'Client Logo 4' },
+    { src: '/images/عملائنا/5.png', alt: 'Client Logo 5' }, { src: '/images/عملائنا/6.png', alt: 'Client Logo 6' },
+    { src: '/images/عملائنا/7.png', alt: 'Client Logo 7' }, { src: '/images/عملائنا/8.png', alt: 'Client Logo 8' },
+    { src: '/images/عملائنا/9.png', alt: 'Client Logo 9' }, { src: '/images/عملائنا/10.png', alt: 'Client Logo 10' },
+    { src: '/images/عملائنا/11.png', alt: 'Client Logo 11' }, { src: '/images/عملائنا/12.png', alt: 'Client Logo 12' },
+  ];
+
   constructor() { }
+
+  getClients() {
+    return this.clients;
+  }
 
   getServices(): Service[] {
     return this.services;

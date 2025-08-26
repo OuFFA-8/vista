@@ -7,6 +7,7 @@ import { MediaItem, PortfolioService, Project, Service } from './../../core/serv
 import { ScrollSpyService } from '../../core/services/scroll-spy/scroll-spy.service';
 import { isPlatformBrowser } from '@angular/common';
 import { AnimationService } from '../../core/services/animation/animation.service';
+
 gsap.registerPlugin(ScrollTrigger);
 
 interface Client {
@@ -48,9 +49,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   ];
 
   constructor() {
-    // 3. إنشاء effect جديد لمراقبة الخدمة
     effect(() => {
-      // إذا انتهى الـ preloader (أصبحت القيمة true)، قم بتشغيل أنيميشن الـ Hero
       if (this.animationService.preloaderFinished()) {
         this.initHeroAnimation();
       }
@@ -183,12 +182,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
       const heroWords = gsap.utils.toArray('.hero-word');
       const heroParagraph = document.querySelector('.hero-paragraph');
 
-      // 2. قم بعكس ترتيب مصفوفة الكلمات
       const reversedHeroWords = heroWords.reverse();
 
       const tl = gsap.timeline();
 
-      // 3. استخدم المصفوفة المعكوسة في الأنيميشن
       tl.from(reversedHeroWords, {
         duration: 0.8,
         y: 50,
@@ -229,7 +226,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }
   }
 
-  // --- 3. دالة جديدة لتغيير الفيديو النشط ---
   setActiveVideo(project: Project): void {
     this.activeVideoItem.set(project);
   }
