@@ -14,15 +14,20 @@ gsap.registerPlugin(ScrollTrigger);
   styleUrl: './about.component.css'
 })
 export class AboutComponent implements OnInit, AfterViewInit {
-  private platformId = inject(PLATFORM_ID);
-
-  private portfolioService = inject(PortfolioService);
-
+  // --- 1. تعريف الخصائص بدون 'inject' هنا ---
+  private platformId: Object;
+  private portfolioService: PortfolioService;
+  
   clients: Client[] = [];
+
+  // --- 2. القيام بالحقن داخل الـ constructor ---
+  constructor() {
+    this.platformId = inject(PLATFORM_ID);
+    this.portfolioService = inject(PortfolioService);
+  }
+
   ngOnInit(): void {
-    // جلب بيانات العملاء من الخدمة
     const allClients = this.portfolioService.getClients();
-    // تكرار الشعارات لجعل الشريط يبدو لا نهائيًا
     this.clients = [...allClients, ...allClients];
   }
 

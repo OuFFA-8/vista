@@ -243,28 +243,30 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   @HostListener('window:scroll', [])
   onWindowScroll(): void {
-    if (!this.sections || !isPlatformBrowser(this.platformId)) return;
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-      if (contactSection.getBoundingClientRect().top < window.innerHeight * 0.75) {
-        return;
-      }
-    }
+    if (!isPlatformBrowser(this.platformId)) return;
+
     let currentSectionId = '';
     const scrollPosition = window.scrollY + this.navbarHeight;
-    this.sections.toArray().reverse().forEach(sectionRef => {
-      const section = sectionRef.nativeElement as HTMLElement;
-      if (scrollPosition >= section.offsetTop) {
-        if (!currentSectionId) {
-          currentSectionId = section.id;
-        }
+
+    // 1. تحقق من قسم التواصل أولاً (لأنه في صفحة أخرى)
+    const contactSection = document.getElementById('contact');
+    if (contactSection && contactSection.getBoundingClientRect().top < window.innerHeight * 0.75) {
+      currentSectionId = 'contact';
+    } else {
+      // 2. إذا لم يكن قسم التواصل نشطًا، تحقق من باقي الأقسام
+      if (this.sections) {
+        this.sections.toArray().reverse().forEach(sectionRef => {
+          const section = sectionRef.nativeElement as HTMLElement;
+          if (scrollPosition >= section.offsetTop) {
+            if (!currentSectionId) {
+              currentSectionId = section.id;
+            }
+          }
+        });
       }
-    });
-    const currentActive = this.scrollSpyService.activeSectionId();
-    if (currentActive === 'contact' && currentSectionId === '') {
-      return;
     }
-    if (currentActive !== currentSectionId) {
+
+    if (this.scrollSpyService.activeSectionId() !== currentSectionId) {
       this.scrollSpyService.activeSectionId.set(currentSectionId);
     }
   }

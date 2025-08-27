@@ -1,9 +1,8 @@
-import { Component, HostListener, inject, signal, computed, DestroyRef, PLATFORM_ID, ViewChild, ElementRef, AfterViewInit, effect } from '@angular/core';
+import { Component, HostListener, inject, signal, computed, PLATFORM_ID, ViewChild, ElementRef } from '@angular/core';
 import { isPlatformBrowser, CommonModule } from '@angular/common';
 import { Router, RouterLink, RouterLinkActive, NavigationEnd } from '@angular/router';
-import { filter, map } from 'rxjs/operators';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ScrollSpyService } from '../../core/services/scroll-spy/scroll-spy.service';
+import { filter } from 'rxjs/operators';
+import { ScrollSpyService } from '../../core/services/scroll-spy/scroll-spy.service'; // 1. تأكد من استيراد الخدمة
 
 @Component({
   selector: 'app-navbar',
@@ -11,63 +10,46 @@ import { ScrollSpyService } from '../../core/services/scroll-spy/scroll-spy.serv
   imports: [
     CommonModule,
     RouterLink,
+    RouterLinkActive
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
-export class NavbarComponent implements AfterViewInit {
+export class NavbarComponent {
+  // --- حقن الخدمات ---
+  private readonly router = inject(Router);
+  private readonly platformId = inject(PLATFORM_ID);
+  private scrollSpyService = inject(ScrollSpyService); // 2. حقن الخدمة
+
+  // --- 3. إعادة تعريف المتغير المفقود ---
+  // هذا يجعل الـ signal من الخدمة متاحًا للقالب
+  activeSectionId = this.scrollSpyService.activeSectionId;
+
+  // --- Signals ---
+  private readonly isScrolled = signal(false);
+  private readonly hasHeroSection = signal(this.checkIfPageHasHero(this.router.url));
+
+  // --- Computed Signal ---
+  readonly showBackground = computed(() => !this.hasHeroSection() || this.isScrolled());
 
   @ViewChild('mobileMenuButton') mobileMenuButton!: ElementRef<HTMLButtonElement>;
-  @ViewChild('mobileMenu') mobileMenu!: ElementRef<HTMLDivElement>;
-  private scrollSpyService = inject(ScrollSpyService);
-
-  private readonly router = inject(Router);
-  private readonly destroyRef = inject(DestroyRef);
-  private readonly platformId = inject(PLATFORM_ID);
-
-  // Signals لحالة الشريط
-  private readonly isScrolled = signal(false);
-  private readonly isHomePage = signal(this.checkIsHomePage(this.router.url));
-  activeSectionId = this.scrollSpyService.activeSectionId;
-  
-  // جعل الـ signal متاحًا للقالب
-
-  // Computed signal: سيقوم بإظهار الخلفية إذا لم نكن في الصفحة الرئيسية، أو إذا قمنا بالتمرير لأسفل
-  readonly showBackground = computed(() => !this.isHomePage() || this.isScrolled());
 
   constructor() {
-    effect(() => {
-      console.log('Navbar received active section ID:', this.activeSectionId());
-    });
-    // مراقبة تغييرات المسار لتحديث حالة isHomePage
     this.router.events.pipe(
-      filter((event): event is NavigationEnd => event instanceof NavigationEnd),
-      map(event => this.checkIsHomePage(event.urlAfterRedirects)),
-      takeUntilDestroyed(this.destroyRef)
-    ).subscribe(isHome => {
-      this.isHomePage.set(isHome);
-      // إعادة تعيين حالة التمرير عند الانتقال إلى الصفحة الرئيسية
-      if (isHome) {
-        this.handleScroll();
-      }
+      filter((event): event is NavigationEnd => event instanceof NavigationEnd)
+    ).subscribe(event => {
+      this.hasHeroSection.set(this.checkIfPageHasHero(event.urlAfterRedirects));
     });
   }
 
-  ngAfterViewInit(): void {
-    // الكود الخاص بك هنا للتحقق من وجود العناصر، وهو ممتاز
+  private checkIfPageHasHero(url: string): boolean {
+    const heroPages = ['/home', '/about'];
+    return heroPages.some(page => url.startsWith(page));
   }
 
-  // 1. تم تصحيح منطق الدالة
-  private checkIsHomePage(url: string): boolean {
-    // فقط الصفحة الرئيسية (/) أو (/home) هي التي يبدأ فيها الشريط شفافًا
-    return url === '/' || url === '/home' || url.startsWith('/portfolio/') || url === '/about';
-  }
-
-  // 2. تم دمج onScroll و handleScroll
   @HostListener('window:scroll')
   private handleScroll(): void {
     if (isPlatformBrowser(this.platformId)) {
-      // يمكنك تغيير القيمة 50 لتحديد متى تظهر الخلفية
       const scrolled = window.scrollY > 50;
       if (this.isScrolled() !== scrolled) {
         this.isScrolled.set(scrolled);

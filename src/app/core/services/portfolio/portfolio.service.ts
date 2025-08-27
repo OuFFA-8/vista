@@ -209,7 +209,6 @@ export class PortfolioService {
             { type: 'image', src: '/images/Hawweat/4/٧-03.webp' },
             { type: 'image', src: '/images/Hawweat/4/٧-05.webp' }
           ],
-          details: { partner: 'اسم العميل', client: 'براندق 1', type: 'بناء هوية' }
         },
         {
           id: 'branding-project-2',
@@ -220,10 +219,8 @@ export class PortfolioService {
             { type: 'image', src: '/images/Hawweat/3/2.webp' },
             { type: 'image', src: '/images/Hawweat/3/3.webp' },
             { type: 'image', src: '/images/Hawweat/3/4.webp' },
-            { type: 'image', src: '/images/Hawweat/3/6.webp' },
             { type: 'image', src: '/images/Hawweat/3/5.webp' }
           ],
-          details: { partner: 'عميل آخر', client: 'براندق 2', type: 'إعادة تصميم هوية' }
         },
         {
           id: 'branding-project-3',
@@ -234,18 +231,15 @@ export class PortfolioService {
             { type: 'image', src: '/images/Hawweat/2/9-02.webp' },
             { type: 'image', src: '/images/Hawweat/2/9-03.webp' },
             { type: 'image', src: '/images/Hawweat/2/9-04.webp' },
-            { type: 'image', src: '/images/Hawweat/2/9-05.webp' },
           ],
-          details: { partner: 'عميل آخر', client: 'براندق 3', type: 'إعادة تصميم هوية' }
         },
         {
           id: 'branding-project-4',
           layout: 'grid',
-          coverImage: '/images/Hawweat/1/8-01.webp',
+          coverImage: '/images/Hawweat/1/8-03.webp',
           media: [
-            { type: 'image', src: '/images/Hawweat/1/8-01.webp' },
-            { type: 'image', src: '/images/Hawweat/1/8-02.webp' },
             { type: 'image', src: '/images/Hawweat/1/8-03.webp' },
+            { type: 'image', src: '/images/Hawweat/1/8-02.webp' },
             { type: 'image', src: '/images/Hawweat/1/8-05.webp' }
           ],
           details: { partner: 'عميل آخر', client: 'براندق 4', type: 'إعادة تصميم هوية' }

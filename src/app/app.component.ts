@@ -1,17 +1,18 @@
-import { Component, OnInit, HostListener, PLATFORM_ID, Inject, inject } from '@angular/core';
-import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
+import { Component, OnInit, PLATFORM_ID, Inject, afterNextRender, inject } from '@angular/core';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { initFlowbite } from 'flowbite';
-import { filter } from 'rxjs';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// استيراد الكومبوننت
 import { NavbarComponent } from "./layout/navbar/navbar.component";
-import { LightboxComponent } from "./shared/components/lightbox/lightbox.component";
-import { ContactSectionComponent } from "./shared/components/contact-section/contact-section.component";
+import { ContactSectionComponent } from './shared/components/contact-section/contact-section.component';
+import { LightboxComponent } from './shared/components/lightbox/lightbox.component';
 import { PreloaderComponent } from './shared/components/preloader/preloader.component';
-
-// استيراد خدمة الـ Scroll Spy
-import { ScrollSpyService } from './core/services/scroll-spy/scroll-spy.service';
 import { isPlatformBrowser } from '@angular/common';
+import { filter } from 'rxjs';
+import { ScrollSpyService } from './core/services/scroll-spy/scroll-spy.service';
+
+gsap.registerPlugin(ScrollTrigger);
 
 @Component({
   selector: 'app-root',
@@ -19,39 +20,31 @@ import { isPlatformBrowser } from '@angular/common';
   imports: [
     RouterOutlet,
     NavbarComponent,
-    LightboxComponent,
     ContactSectionComponent,
-    PreloaderComponent
+    PreloaderComponent,
+    LightboxComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit {
-
-  // حقن الخدمات
-  private scrollSpyService = inject(ScrollSpyService);
   private platformId = inject(PLATFORM_ID);
+
+  private scrollSpyService = inject(ScrollSpyService);
   private router = inject(Router);
 
-  private navbarHeight = 100;
-  // متغير لتخزين ما إذا كنا في الصفحة الرئيسية
-  private isHomePage: boolean = true;
-
   constructor() {
+    // 4. أعدنا هذا المنطق المهم "فقط"
     this.router.events.pipe(
       filter((event): event is NavigationEnd => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
-      // 1. إذا كنا في صفحة داخلية، قم بتحديث الخدمة مباشرة
-      if (event.urlAfterRedirects.startsWith('/about')) {
-        this.scrollSpyService.activeSectionId.set('about');
-      } else if (event.urlAfterRedirects.startsWith('/portfolio')) {
-        this.scrollSpyService.activeSectionId.set('portfolio');
-      } else {
-        // إذا كنا في الصفحة الرئيسية، دع الـ Scroll Spy يتولى الأمر
-        // ولكن أعد تعيينها مؤقتًا لتجنب بقاء الحالة القديمة
-        if (this.scrollSpyService.activeSectionId() !== '') {
-          this.scrollSpyService.activeSectionId.set('');
-        }
+      const isHomePage = (event.urlAfterRedirects.startsWith('/home') || event.urlAfterRedirects === '/');
+      
+      // إذا لم نكن في الصفحة الرئيسية، قم بإعادة تعيين الـ Scroll Spy
+      if (!isHomePage) {
+        // هذا السطر يحل المشكلة: هو "يُطفئ" أي تفعيل قديم من الـ Scroll Spy،
+        // ويترك المجال لـ routerLinkActive ليعمل بحرية في الصفحات الداخلية.
+        this.scrollSpyService.activeSectionId.set('NOT_HOME'); // استخدم أي قيمة مميزة لا تساوي ''
       }
     });
   }
@@ -62,23 +55,29 @@ export class AppComponent implements OnInit {
     }
   }
 
-  @HostListener('window:scroll', [])
-  onAppScroll(): void {
-    // لا تقم بتشغيل هذا المنطق إلا إذا كنا في الصفحة الرئيسية
-    if (!this.isHomePage) {
-      return;
-    }
+  private initContactAnimation(): void {
+    // تأكد من وجود قسم التواصل قبل محاولة تحريكه
+    const contactSection = document.querySelector('#contact');
+    if (!contactSection) return;
 
-    if (isPlatformBrowser(this.platformId)) {
-      const contactSection = document.getElementById('contact');
-      if (contactSection) {
-        const threshold = window.innerHeight * 0.66;
-        if (contactSection.getBoundingClientRect().top < threshold) {
-          if (this.scrollSpyService.activeSectionId() !== 'contact') {
-            this.scrollSpyService.activeSectionId.set('contact');
-          }
-        }
+    const contactTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#contact",
+        start: "top 85%",
+        toggleActions: "play none none none"
       }
-    }
+    });
+    contactTl.from(".contact-text-content", {
+      opacity: 0,
+      x: 50,
+      duration: 0.8,
+      ease: 'power2.out'
+    })
+      .from(".contact-form-container", {
+        opacity: 0,
+        x: -50,
+        duration: 0.8,
+        ease: 'power2.out'
+      }, "<");
   }
 }
