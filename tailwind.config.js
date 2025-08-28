@@ -11,7 +11,7 @@ module.exports = {
       colors: {
         'vsta-dark-blue': '#111111',
         'vsta-purple': '#6b43f4',
-        'vsta-teal': '#40FFBA',
+        'vsta-teal': '#b1aafe',
       },
       animation: {
         'infinite-scroll': 'infinite-scroll 40s linear infinite',
