@@ -17,6 +17,9 @@ export interface Project {
 export interface Service {
   title: string;
   linkText: string;
+  iconClass: string; // 1. أضفنا خاصية للأيقونة
+  description: string; // 2. أضفنا وصفًا مختصرًا
+
   portfolio?: Project[];
 }
 
@@ -34,6 +37,9 @@ export class PortfolioService {
     {
       title: 'تصاميم جرافيك',
       linkText: 'اضغط للمعاينة',
+      iconClass: 'fa-solid fa-pen-ruler', // أيقونة من Font Awesome
+      description: 'نصمم هويات بصرية وقصصًا مرئية تترك أثرًا وتلهم جمهورك.',
+
       portfolio: [
         {
           id: 'graphics-project-1',
@@ -135,6 +141,8 @@ export class PortfolioService {
     {
       title: 'ويب سايت',
       linkText: 'اضغط للمعاينة',
+      iconClass: 'fa-solid fa-code',
+      description: 'نطور مواقع إلكترونية سريعة، متجاوبة، وبتجربة مستخدم فريدة.',
 
       portfolio: [
         {
@@ -170,6 +178,9 @@ export class PortfolioService {
     {
       title: 'إنتاج اعلامي',
       linkText: 'اضغط للمعاينة',
+      iconClass: 'fa-solid fa-video',
+      description: 'ننتج محتوى مرئي احترافي من الفكرة إلى التنفيذ النهائي.',
+
       portfolio: [
         {
           id: 'video-project-1',
@@ -198,6 +209,9 @@ export class PortfolioService {
     {
       title: 'علامات تجارية',
       linkText: 'اضغط للمعاينة',
+      iconClass: 'fa-solid fa-lightbulb',
+      description: 'نبني علامات تجارية قوية لها شخصية وهوية واضحة في السوق.',
+
       portfolio: [
         {
           id: 'branding-project-1',

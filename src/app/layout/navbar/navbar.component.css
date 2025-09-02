@@ -1,12 +1,17 @@
-ul a.active-link {
-  @apply font-bold text-vsta-teal border-b-2 border-vsta-teal;
+/* navbar.component.css */
+
+/* 1. تنسيق الرابط العادي */
+ul a {
+  @apply text-gray-300 hover:text-white;
 }
 
-/* 
-  لضمان أن الروابط في الموبايل ترث اللون الأبيض أيضًا بشكل صحيح
-*/
-@media (max-width: 768px) {
-  ul a {
-    @apply text-white;
-  }
+/* 2. تنسيق الرابط النشط */
+ul a.active-link {
+  @apply text-white font-bold relative; /* اللون الأبيض السميك */
+}
+  
+/* 3. الخط السفلي للرابط النشط */
+ul a.active-link::after {
+  content: '';
+  @apply absolute bottom-[-8px] left-0 right-0 h-[1px] rounded-full bg-vsta-teal;
 }

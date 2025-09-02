@@ -33,6 +33,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   activeTab = signal<Service | null>(null);
   activeServiceCard = signal<Service | null>(null);
   activeVideoItem = signal<Project | null>(null);
+  activeShowcaseItem = signal<Service | null>(null);
 
 
   @ViewChild('clientsScroller') clientsScroller!: ElementRef;
@@ -55,35 +56,32 @@ export class HomeComponent implements OnInit, AfterViewInit {
       }
     });
   }
+
+
+
   ngOnInit(): void {
     const allServices = this.portfolioService.getServices();
-    let servicesWithPortfolio = allServices.filter(s => s.portfolio && s.portfolio.length > 0);
-
-    const graphicDesignService = servicesWithPortfolio.find(s => s.title === 'تصاميم جرافيك');
-
-    if (graphicDesignService) {
-      const otherServices = servicesWithPortfolio.filter(s => s.title !== 'تصاميم جرافيك');
-
-      this.services = [graphicDesignService, ...otherServices];
-
-      this.activeTab.set(graphicDesignService);
-      this.activeServiceCard.set(graphicDesignService);
-    } else {
-      this.services = servicesWithPortfolio;
-      if (this.services.length > 0) {
-        this.activeTab.set(this.services[0]);
-        this.activeServiceCard.set(this.services[0]);
-      }
+    this.services = allServices.filter(s => s.portfolio && s.portfolio.length > 0);
+    if (this.services.length > 0) {
+      this.activeShowcaseItem.set(this.services[0]);
+      this.activeTab.set(this.services[0]);
     }
   }
 
 
   ngAfterViewInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      this.initScrollAnimations();
+    }
     if (this.sections) {
       this.onWindowScroll();
     }
-    this.initScrollAnimations();
   }
+
+  setActiveShowcase(service: Service): void {
+    this.activeShowcaseItem.set(service);
+  }
+
 
   private initScrollAnimations(): void {
     if (isPlatformBrowser(this.platformId)) {
@@ -207,36 +205,32 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.activeServiceCard.set(service);
     this.activeTab.set(service);
     if (isPlatformBrowser(this.platformId)) {
-      const portfolioSection = document.getElementById('portfolio');
-      if (portfolioSection) {
-        portfolioSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }
 
   changeTab(service: Service): void {
     this.activeTab.set(service);
-    this.activeServiceCard.set(null);
-
-    // إذا كان التاب الجديد هو "إنتاج اعلامي"، قم بتعيين الفيديو الأول كنشط
     if (service.title === 'إنتاج اعلامي' && service.portfolio && service.portfolio.length > 0) {
       this.activeVideoItem.set(service.portfolio[0]);
     } else {
-      this.activeVideoItem.set(null); // قم بإلغاء التعيين للخدمات الأخرى
+      this.activeVideoItem.set(null);
     }
   }
 
   setActiveVideo(project: Project): void {
     this.activeVideoItem.set(project);
   }
+  
+  openGalleryInLightbox(project: Project): void {
+    this.lightboxService.open(project.media);
+  }
 
   openVideoInLightbox(item: MediaItem): void {
     this.lightboxService.open([item]);
   }
 
-  openGalleryInLightbox(project: Project): void {
-    this.lightboxService.open(project.media);
-  }
+  
 
   scrollRight(): void { this.clientsScroller.nativeElement.scrollBy({ left: 300, behavior: 'smooth' }); }
   scrollLeft(): void { this.clientsScroller.nativeElement.scrollBy({ left: -300, behavior: 'smooth' }); }

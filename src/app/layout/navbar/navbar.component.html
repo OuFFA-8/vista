@@ -1,92 +1,98 @@
-<!-- Navbar with new VSTA theme -->
-<nav [class.bg-vsta-dark-blue]="showBackground()" [class.bg-transparent]="!showBackground()"
-  class="py-4 md:py-6 fixed top-0 left-0 w-full capitalize transition-all duration-500 z-50">
+<div class="fixed top-4 left-0 right-0 w-full z-50 px-4">
 
-  <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto px-4">
+  <nav [ngClass]="{
+    'bg-vsta-dark-blue/80': showBackground(),
+    'bg-black/20': !showBackground()
+  }"
+    class="py-3 md:py-4 capitalize transition-colors duration-500 max-w-screen-xl mx-auto md:px-6 rounded-full backdrop-blur-md border border-white/10">
 
-    <!-- vista Logo -->
-    <a routerLink="/" class="w-32 flex items-center space-x-3 rtl:space-x-reverse">
-      <img src="/images/شعار فستا نهائي - 3.webp" alt="" class="w-full">
+    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto px-4">
 
-    </a>
+      <!-- الشعار -->
+      <a routerLink="/" class="w-28 flex-shrink-0 ml-4 md:ml-0">
+        <img src="/images/شعار فستا نهائي - 3.webp" alt="Vsta Logo" class="w-full"> <!-- استخدم شعار SVG -->
+      </a>
 
-    <!-- Hamburger Menu Icon -->
-    <div class="flex items-center md:order-2 space-x-1 rtl:space-x-reverse">
-      <button #mobileMenuButton data-collapse-toggle="navbar-vsta" type="button"
-        class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-white rounded-lg md:hidden hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-vsta-teal"
-        aria-controls="navbar-vsta" aria-expanded="false">
-        <span class="sr-only">Open main menu</span>
-        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M1 1h15M1 7h15M1 13h15" />
-        </svg>
-      </button>
+
+      <div #mobileMenu class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-vsta">
+
+        <ul
+          class="hidden md:flex flex-col text-white font-medium p-4 md:p-0  mt-4 border border-white/20 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 bg-vsta-purple md:bg-transparent">
+
+          <li>
+            <a (click)="closeMobileMenuOnClick()" routerLink="/home" fragment="contact"
+              [class.active-link]="activeSectionId() === 'contact'"
+              class="block py-2 px-3 md:p-0 rounded text-lg transition-colors duration-300 hover:text-vsta-teal">
+              تواصل معنا
+            </a>
+          </li>
+
+          <li>
+            <a (click)="closeMobileMenuOnClick()" routerLink="/home" fragment="services"
+              [class.active-link]="activeSectionId() === 'services'"
+              class="block py-2 px-3 md:p-0 rounded text-lg transition-colors duration-300 hover:text-vsta-teal">
+              أعمالنا
+            </a>
+          </li>
+          <li>
+            <a (click)="closeMobileMenuOnClick()" routerLink="/about" routerLinkActive="active-link"
+              class="block py-2 px-3 md:p-0 rounded text-lg transition-colors duration-300 hover:text-vsta-teal">
+              من نحن
+            </a>
+          </li>
+          <li>
+            <a (click)="closeMobileMenuOnClick()" routerLink="/home" [class.active-link]="activeSectionId() === ''"
+              class="block py-2 px-3 md:p-0 rounded text-lg transition-colors duration-300 hover:text-vsta-teal">
+              الرئيسية
+            </a>
+          </li>
+        </ul>
+
+        <ul
+          class="flex flex-col md:hidden text-white font-medium p-4 mt-4 border border-white/20 rounded-lg bg-vsta-purple text-end space-y-4">
+          <li>
+            <a (click)="closeMobileMenuOnClick()" routerLink="/home" [class.active-link]="activeSectionId() === ''"
+              class="block py-2 rounded text-lg transition-colors duration-300 hover:text-vsta-teal">
+              الرئيسية
+            </a>
+          </li>
+          <li>
+            <a (click)="closeMobileMenuOnClick()" routerLink="/about"
+              [class.active-link]="activeSectionId() === 'about'"
+              class="block py-2 rounded text-lg transition-colors duration-300 hover:text-vsta-teal">
+              من نحن
+            </a>
+          </li>
+          <li>
+            <a (click)="closeMobileMenuOnClick()" routerLink="/home" fragment="services"
+              [class.active-link]="activeSectionId() === 'services'"
+              class="block py-2 rounded text-lg transition-colors duration-300 hover:text-vsta-teal">
+              أعمالنا
+            </a>
+          </li>
+          <li>
+            <a (click)="closeMobileMenuOnClick()" routerLink="/home" fragment="contact"
+              [class.active-link]="activeSectionId() === 'contact'"
+              class="block py-2 rounded text-lg transition-colors duration-300 hover:text-vsta-teal">
+              تواصل معنا
+            </a>
+          </li>
+        </ul>
+      </div>
+
+
+      <div class="flex md:hidden">
+        <button #mobileMenuButton data-collapse-toggle="navbar-vsta" type="button"
+          class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-white rounded-lg hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-vsta-teal"
+          aria-controls="navbar-vsta" aria-expanded="false">
+          <span class="sr-only">Open main menu</span>
+          <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M1 1h15M1 7h15M1 13h15" />
+          </svg>
+        </button>
+      </div>
     </div>
+  </nav>
 
-    <div #mobileMenu class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-vsta">
-  <!-- 1. أضفنا text-white هنا ليكون اللون الافتراضي الموروث -->
-  <ul
-    class="hidden  md:flex flex-col text-white font-medium p-4 md:p-0 mt-4 border border-white/20 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 bg-vsta-purple md:bg-transparent">
-
-    <li>
-      <a (click)="closeMobileMenuOnClick()" routerLink="/home" fragment="contact"
-        [class.active-link]="activeSectionId() === 'contact'"
-        class="block py-2 px-3 md:p-0 rounded text-lg transition-colors duration-300 hover:text-vsta-teal">
-        تواصل معنا
-      </a>
-    </li>
-
-    <li>
-      <a (click)="closeMobileMenuOnClick()" routerLink="/home" fragment="services"
-        [class.active-link]="activeSectionId() === 'services'"
-        class="block py-2 px-3 md:p-0 rounded text-lg transition-colors duration-300 hover:text-vsta-teal">
-        أعمالنا
-      </a>
-    </li>
-    <li>
-      <a (click)="closeMobileMenuOnClick()" routerLink="/about" routerLinkActive="active-link"
-        class="block py-2 px-3 md:p-0 rounded text-lg transition-colors duration-300 hover:text-vsta-teal">
-        من نحن
-      </a>
-    </li>
-    <li>
-      <a (click)="closeMobileMenuOnClick()" routerLink="/home" [class.active-link]="activeSectionId() === ''"
-        class="block py-2 px-3 md:p-0 rounded text-lg transition-colors duration-300 hover:text-vsta-teal">
-        الرئيسية
-      </a>
-    </li>
-  </ul>
-
-  <ul
-    class="flex flex-col md:hidden text-white font-medium p-4 mt-4 border border-white/20 rounded-lg bg-vsta-purple text-end space-y-4">
-    <li>
-      <a (click)="closeMobileMenuOnClick()" routerLink="/home" [class.active-link]="activeSectionId() === ''"
-        class="block py-2 rounded text-lg transition-colors duration-300 hover:text-vsta-teal">
-        الرئيسية
-      </a>
-    </li>
-    <li>
-      <a (click)="closeMobileMenuOnClick()" routerLink="/about" [class.active-link]="activeSectionId() === 'about'"
-        class="block py-2 rounded text-lg transition-colors duration-300 hover:text-vsta-teal">
-        من نحن
-      </a>
-    </li>
-    <li>
-      <a (click)="closeMobileMenuOnClick()" routerLink="/home" fragment="services"
-        [class.active-link]="activeSectionId() === 'services'"
-        class="block py-2 rounded text-lg transition-colors duration-300 hover:text-vsta-teal">
-        أعمالنا
-      </a>
-    </li>
-    <li>
-      <a (click)="closeMobileMenuOnClick()" routerLink="/home" fragment="contact"
-        [class.active-link]="activeSectionId() === 'contact'"
-        class="block py-2 rounded text-lg transition-colors duration-300 hover:text-vsta-teal">
-        تواصل معنا
-      </a>
-    </li>
-  </ul>
 </div>
-
-  </div>
-</nav>

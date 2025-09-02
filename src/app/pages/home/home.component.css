@@ -1,8 +1,3 @@
-/* ============================================= */
-/* ===== Tabs Styling ===== */
-/* ============================================= */
-
-/* تنسيق الزر العادي (غير النشط) */
 .tab-btn {
   @apply bg-gray-200 text-gray-700 font-semibold;
 }
@@ -12,34 +7,29 @@
   @apply bg-gray-300;
 }
 
-/* 
-  تنسيق الزر النشط 
-  - خلفية بلون vsta-dark-blue
-  - لون نص أبيض
-*/
+/* تنسيق الزر النشط */
 .tab-btn.active-tab {
   @apply bg-vsta-dark-blue text-white;
 }
 
-
-/* ============================================= */
-/* ===== Service Cards Styling ===== */
-/* ============================================= */
-
-/* تنسيق بطاقة الخدمة عندما تكون نشطة */
-.active-service {
-  @apply bg-vsta-teal text-vsta-dark-blue;
+.service-card.active-service {
+  @apply bg-vsta-teal text-vsta-dark-blue ring-2 ring-vsta-teal;
 }
 
-.active-service i,
-.active-service span {
+/* 
+  تعديل لون النص الداخلي للبطاقة النشطة
+*/
+.service-card.active-service h3,
+.service-card.active-service p {
   @apply text-vsta-dark-blue;
 }
 
-.active-service .w-16 {
-  @apply bg-vsta-dark-blue;
-}
 
+/* ============================================= */
+/* ===== Video Playlist Styling (in Portfolio) ===== */
+/* ============================================= */
+
+/* تنسيق زر الفيديو في قائمة التشغيل */
 .video-thumb-btn {
   @apply bg-gray-200/50 hover:bg-gray-200;
 }
@@ -49,16 +39,7 @@
   @apply bg-white ring-2 ring-vsta-teal shadow-lg;
 }
 
-.service-card {
-  opacity: 0;
-  transform: translateY(50px);
-}
 
-/* ============================================= */
-/* ===== Animation Styling ===== */
-/* ============================================= */
-
-/* تأثير ظهور شبكة البورتفوليو */
 .portfolio-grid {
   animation: fadeIn 0.5s ease-in-out;
 }
@@ -68,8 +49,40 @@
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* ... (كود الـ Tabs والفيديو يبقى كما هو) ... */
+
+/* ============================================= */
+/* ===== New Bright Interactive List Styling ===== */
+/* ============================================= */
+
+/* تنسيق عنصر القائمة العادي (غير النشط) */
+.showcase-item {
+  border-right: 4px solid transparent;
+}
+
+/* تنسيق عنصر القائمة النشط (عند الـ hover) */
+.showcase-item.active-showcase-item {
+  @apply bg-white border-vsta-teal shadow-lg;
+}
+
+/* لون الرقم والعنوان في الحالة العادية */
+.showcase-item .item-index,
+.showcase-item .item-title {
+  @apply text-gray-400;
+}
+
+/* لون الرقم والعنوان في الحالة النشطة */
+.showcase-item.active-showcase-item .item-index {
+  @apply text-vsta-teal;
+}
+
+.showcase-item.active-showcase-item .item-title {
+  @apply text-vsta-dark-blue;
 }

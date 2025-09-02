@@ -1,56 +1,90 @@
 <main class="bg-vsta-purple text-white font-sans overflow-x-hidden">
 
   <!-- =============================== -->
-  <!-- ===== Hero Section ===== -->
+  <!-- ===== New Hero Section ===== -->
   <!-- =============================== -->
-  <section class="relative min-h-screen flex items-center justify-center pt-20 pb-20 bg-vsta-purple text-white">
-
-    <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover z-0">
+  <section class="relative h-screen bg-vsta-dark-blue flex items-center justify-center text-white overflow-hidden">
+    <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover z-0 opacity-20">
       <source src="/video/فيديو الموقع الالكتروني.mp4" type="video/mp4">
     </video>
+    <div class="absolute inset-0 bg-gradient-to-t from-vsta-dark-blue via-transparent to-transparent"></div>
+    <div class="relative z-10 text-center px-4">
+      <h1 class="font-black text-5xl md:text-7xl lg:text-8xl leading-tight">
+        <span class="hero-word inline-block">انـتشـار</span>
+                <span class="hero-word inline-block text-vsta-teal mx-3">تــأثير</span>
 
-    <div class="absolute inset-0 bg-gradient-to-bl bg-black  opacity-60"></div>
-    <!-- <div class="absolute bottom-0 left-0 w-full h-[200px] bg-repeat opacity-100 "
-      style="background-image: url('/images/باترن\ -\ ١.webp'); background-size: cover; ">
-    </div> -->
+                <span class="hero-word inline-block">إبـداع</span>
 
-    <!-- محتوى الـ Hero -->
-  <div class="relative z-10 text-center px-4">
-    <h1 class="font-black text-5xl md:text-7xl lg:text-8xl leading-tight">
-      <span class="hero-word inline-block">انتشـار</span>
-       <span class="hero-word inline-block px-4 text-vsta-teal">تــأثـير</span>
-      <span class="hero-word inline-block">إبـداع</span>
-    </h1>
-    <!-- 2. أضفنا كلاس "hero-paragraph" للفقرة -->
-    <p class="hero-paragraph mt-6 text-lg md:text-xl max-w-3xl mx-auto text-gray-300">
-      نحن نؤمن بأن كل قصة تستحق أن تروى بشكل يلهم ويبهج ويثير الفضول. دعنا نساعدك في تحقيق ذلك.
-    </p>
-  </div>
+      </h1>
+      <p class="hero-paragraph mt-6 text-lg md:text-xl max-w-3xl mx-auto text-gray-300">
+        نحن نؤمن بأن كل قصة تستحق أن تروى بشكل يلهم ويبهج ويثير الفضول. دعنا نساعدك في تحقيق ذلك.
+      </p>
+    </div>
   </section>
 
-
-  <section id="services" #scrollSection class="bg-gray-100 pt-32 pb-20 text-vsta-dark-blue">
+  <!-- =============================== -->
+  <!-- ===== New Elegant Services Section ===== -->
+  <!-- =============================== -->
+  <section id="services" #scrollSection class="bg-white py-20 text-vsta-dark-blue">
     <div class="container mx-auto px-6 lg:px-8">
+      <div dir="rtl" class="text-center mb-16">
+        <h2 class="text-4xl font-bold">ماذا نقدم؟</h2>
+        <p class="text-lg text-gray-600 mt-4 max-w-2xl mx-auto">نحن شريكك الإبداعي في كل خطوة، نقدم حلولاً متكاملة تساعد
+          علامتك التجارية على النمو والانتشار.</p>
+      </div>
 
-      <div dir="rtl" class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 -mt-56 relative z-10">
-
+      <!-- شبكة البطاقات الأنيقة -->
+      <div dir="rtl" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         @for (service of services; track service) {
-        <button (click)="selectServiceAndScroll(service)" [class.active-service]="activeServiceCard() === service"
-          class="service-card group relative text-white rounded-3xl p-6 md:p-8 flex flex-col justify-center items-center text-center transform hover:-translate-y-2 transition-all duration-300 shadow-2xl min-h-[250px] md:min-h-[280px] bg-black">
+        <div
+          class="service-card group bg-gray-100 p-8 rounded-2xl text-center flex flex-col items-center transition-all duration-300 hover:bg-vsta-dark-blue hover:text-white hover:-translate-y-2 group">
 
-          <i
-            class="fa-solid fa-arrow-up absolute top-8 right-8 text-vsta-teal text-2xl transition-transform duration-300 rotate-45 group-hover:scale-125 group-hover:rotate-[40deg]"></i>
-          <div class="flex flex-col items-center">
-            <h3 class="text-4xl font-bold whitespace-pre-line">{{ service.title }}</h3>
-            <div class="w-16 h-0.5 bg-vsta-teal mt-6 mb-4"></div>
-            <span class="text-vsta-teal text-sm font-semibold">{{ service.linkText }}</span>
+          <!-- الأيقونة -->
+          <div
+            class="bg-vsta-teal text-vsta-dark-blue rounded-full w-16 h-16 flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110">
+            <i class="{{service.iconClass}} text-3xl transition-transform duration-300 group-hover:rotate-12"></i>
           </div>
-        </button>
+
+          <!-- المحتوى النصي -->
+          <h3 class="text-2xl font-bold mb-3">{{ service.title }}</h3>
+          <p class="text-gray-500 group-hover:text-gray-300 mb-6 flex-grow">{{ service.description }}</p>
+
+          <!-- الزر -->
+          <button (click)="selectServiceAndScroll(service)" class="font-semibold text-vsta-teal group-hover:text-white">
+            اعرف المزيد <i class="fa-solid fa-arrow-left mr-2"></i>
+          </button>
+
+        </div>
         }
       </div>
     </div>
   </section>
 
+  <!-- =============================== -->
+  <!-- ===== Why Us Section (New) ===== -->
+  <!-- =============================== -->
+  <section class="bg-gray-100 py-20 text-vsta-dark-blue">
+    <div dir="rtl" class="container mx-auto px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold">لماذا تختار فيستا؟</h2>
+        <p class="text-lg text-gray-600 mt-4">نحن لا نقدم خدمات فقط، بل نبني شراكات نجاح</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="why-us-card bg-white p-8 rounded-2xl shadow-lg text-center">
+          <h3 class="text-2xl font-bold mb-3">رؤية إبداعية</h3>
+          <p class="text-gray-500">نحول أفكارك إلى واقع يتجاوز التوقعات بلمسة فنية فريدة.</p>
+        </div>
+        <div class="why-us-card bg-white p-8 rounded-2xl shadow-lg text-center">
+          <h3 class="text-2xl font-bold mb-3">جودة لا تهاون فيها</h3>
+          <p class="text-gray-500">نلتزم بأعلى معايير الجودة والإتقان في كل مرحلة من مراحل العمل.</p>
+        </div>
+        <div class="why-us-card bg-white p-8 rounded-2xl shadow-lg text-center">
+          <h3 class="text-2xl font-bold mb-3">شريكك نحو النجاح</h3>
+          <p class="text-gray-500">نعمل معك جنبًا إلى جنب لتحقيق أهدافك وترك بصمة مؤثرة.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- ============================================= -->
   <!-- ===== START: Portfolio Section (Final Hybrid Logic) ===== -->
@@ -163,7 +197,7 @@
   <!-- =============================== -->
   <!-- ===== Clients Section (Slider) ===== -->
   <!-- =============================== -->
-  <section  class="bg-gray-100 py-20 text-vsta-dark-blue">
+  <section class="bg-gray-100 py-20 text-vsta-dark-blue">
     <div class="container mx-auto px-6 lg:px-8">
 
       <h2 class="text-4xl font-bold text-end mb-12">عملنا معهم</h2>
