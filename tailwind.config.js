@@ -15,12 +15,19 @@ module.exports = {
       },
       animation: {
         'infinite-scroll': 'infinite-scroll 40s linear infinite',
+        'wiggle': 'wiggle 1s ease-in-out infinite',
+
       },
       keyframes: {
         'infinite-scroll': {
           from: { transform: 'translateX(0)' },
           to: { transform: 'translateX(-100%)' },
+        },
+        'wiggle': {
+          '0%, 100%': { transform: 'rotate(-8deg)' },
+          '50%': { transform: 'rotate(8deg)' },
         }
+
       }
     },
   },

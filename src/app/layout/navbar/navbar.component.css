@@ -9,9 +9,9 @@ ul a {
 ul a.active-link {
   @apply text-white font-bold relative; /* اللون الأبيض السميك */
 }
-  
+
 /* 3. الخط السفلي للرابط النشط */
 ul a.active-link::after {
   content: '';
-  @apply absolute bottom-[-8px] left-0 right-0 h-[1px] rounded-full bg-vsta-teal;
+  @apply absolute bottom-[-8px] left-0 right-0 h-[2px] rounded-full bg-vsta-teal;
 }
