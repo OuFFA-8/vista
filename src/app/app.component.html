@@ -3,33 +3,31 @@
 
 <app-navbar></app-navbar>
 
-<!-- الشريط الجانبي العائم (النسخة المُعدّلة) -->
-<aside class="fixed top-1/2 -translate-y-1/2 right-0 z-50 flex flex-col items-end mr-2 md:mr-2">
+<!-- الشريط الجانبي العائم (النسخة المُصححة) -->
+<aside class="fixed top-1/2 -translate-y-1/2 right-0 z-50 flex flex-col items-end mr-2 md:mr-4">
 
-  <!-- 1. تم تغيير rounded-l-xl إلى rounded-xl -->
   <a href="https://drive.google.com/file/d/1y8bze3bPvO3hsASIW1n48ldUGel3WApE/view"
-    class="bg-vsta-purple text-white p-4 rounded-xl shadow-lg mb-2 transform transition-transform hover:scale-105">
-    <div class="flex items-center gap-3 [writing-mode:vertical-rl] text-orientation-mixed">
-      <!-- ... أيقونة الملف ... -->
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 rotate-90" fill="none" viewBox="0 0 24 24"
-        stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-      </svg>
-      <span class="text-sm tracking-widest">ملفنا التعريفي</span>
+    class="bg-vsta-purple text-white p-2 rounded-xl shadow-lg mb-2 transform transition-transform hover:scale-105">
+    <!-- ============================================= -->
+    <!-- START: تمت إضافة حاوية Flexbox هنا -->
+    <!-- ============================================= -->
+    <div class="flex flex-col items-center justify-center h-full px-2 py-3">
+      <i class="fa-solid fa-file-lines mb-2 text-lg"></i> <!-- أيقونة جديدة وأوضح -->
+      <span class="[writing-mode:vertical-rl] text-orientation-mixed text-xs tracking-widest">ملفنا التعريفي</span>
     </div>
+    <!-- ============================================= -->
+    <!-- END: نهاية الإضافة -->
+    <!-- ============================================= -->
   </a>
 
-  <!-- 2. تم تغيير rounded-l-xl إلى rounded-xl -->
   <a href="https://wa.me/message/Z36J62K7EN3WN1"
-    class="bg-vsta-teal text-vsta-dark-blue font-bold p-4 rounded-xl shadow-lg transform transition-transform hover:scale-105">
-    <div class="flex items-center gap-3 [writing-mode:vertical-rl] text-orientation-mixed">
-      <i class="fa-brands fa-whatsapp"></i>
-      <span class="text-sm tracking-widest">واتساب</span>
+    class="bg-vsta-teal text-vsta-dark-blue font-bold p-2 rounded-xl shadow-lg transform transition-transform hover:scale-105">
+    <div class="flex flex-col items-center justify-center h-full px-2 py-3">
+      <i class="fa-brands fa-whatsapp mb-2 text-lg"></i>
+      <span class="[writing-mode:vertical-rl] text-orientation-mixed text-xs tracking-widest">واتساب</span>
     </div>
   </a>
 </aside>
-
 <router-outlet class="bg-[#e8e8e8]"></router-outlet>
 
 

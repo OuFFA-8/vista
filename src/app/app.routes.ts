@@ -2,15 +2,17 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
 
-
-    { path: '', redirectTo: 'home', pathMatch: 'full' },
-
     {
-        path: 'home',
+        path: '',
         loadComponent: () =>
             import('./pages/home/home.component').then(m => m.HomeComponent),
         title: 'Vsta | الرئيسية'
     },
+
+    // 2. قمنا بتحويل مسار "home" القديم ليقوم بإعادة التوجيه إلى المسار الرئيسي
+    { path: 'home', redirectTo: '', pathMatch: 'full' },
+
+    // باقي المسارات تبقى كما هي
     {
         path: 'portfolio/:id',
         loadComponent: () =>

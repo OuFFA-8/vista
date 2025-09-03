@@ -74,17 +74,26 @@
       </div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 
-        <div class="why-us-card bg-white p-8 rounded-2xl shadow-lg text-center text-vsta-dark-blue">
+        <!-- البطاقة الأولى -->
+        <div
+          class="why-us-card bg-white/5 backdrop-blur-md border border-white/10 p-8 rounded-2xl text-center text-white transition-all duration-300 hover:bg-white/10 hover:border-vsta-teal">
+          <!-- يمكنك إضافة أيقونة هنا إذا أردت -->
           <h3 class="text-2xl font-bold mb-3">رؤية إبداعية</h3>
-          <p class="text-gray-500">نحول أفكارك إلى واقع يتجاوز التوقعات بلمسة فنية فريدة.</p>
+          <p class="text-gray-300">نحول أفكارك إلى واقع يتجاوز التوقعات بلمسة فنية فريدة.</p>
         </div>
-        <div class="why-us-card bg-white p-8 rounded-2xl shadow-lg text-center text-vsta-dark-blue">
+
+        <!-- البطاقة الثانية -->
+        <div
+          class="why-us-card bg-white/5 backdrop-blur-md border border-white/10 p-8 rounded-2xl text-center text-white transition-all duration-300 hover:bg-white/10 hover:border-vsta-teal">
           <h3 class="text-2xl font-bold mb-3">جودة لا تهاون فيها</h3>
-          <p class="text-gray-500">نلتزم بأعلى معايير الجودة والإتقان في كل مرحلة من مراحل العمل.</p>
+          <p class="text-gray-300">نلتزم بأعلى معايير الجودة والإتقان في كل مرحلة من مراحل العمل.</p>
         </div>
-        <div class="why-us-card bg-white p-8 rounded-2xl shadow-lg text-center text-vsta-dark-blue">
+
+        <!-- البطاقة الثالثة -->
+        <div
+          class="why-us-card bg-white/5 backdrop-blur-md border border-white/10 p-8 rounded-2xl text-center text-white transition-all duration-300 hover:bg-white/10 hover:border-vsta-teal">
           <h3 class="text-2xl font-bold mb-3">شريكك نحو النجاح</h3>
-          <p class="text-gray-500">نعمل معك جنبًا إلى جنب لتحقيق أهدافك وترك بصمة مؤثرة.</p>
+          <p class="text-gray-300">نعمل معك جنبًا إلى جنب لتحقيق أهدافك وترك بصمة مؤثرة.</p>
         </div>
       </div>
     </div>
@@ -161,7 +170,7 @@
 
         } @else if (tab.portfolio) {
 
-        <div dir="rtl" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div dir="rtl" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
           @for (project of tab.portfolio; track project.id) {
           @if (tab.title === 'براندق') {
           <a dir="ltr" [routerLink]="['/portfolio', project.id]"
