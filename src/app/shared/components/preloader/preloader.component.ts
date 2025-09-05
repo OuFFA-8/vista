@@ -10,6 +10,7 @@ import { AnimationService } from '../../../core/services/animation/animation.ser
   templateUrl: './preloader.component.html',
   styleUrl: './preloader.component.css'
 })
+
 export class PreloaderComponent implements OnInit {
   private platformId = inject(PLATFORM_ID);
   private animationService = inject(AnimationService);
@@ -40,12 +41,9 @@ export class PreloaderComponent implements OnInit {
       roundProps: 'value',
       ease: 'power1.inOut',
       onUpdate: () => {
-        // --- START: تم تعديل هذا الجزء ---
-        // تحديث نص الأرقام فقط
         if (counterValueElement) {
           counterValueElement.textContent = `${counter.value}`;
         }
-        // --- END: نهاية التعديل ---
       }
     })
       .to(logoMask, {
