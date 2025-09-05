@@ -26,6 +26,10 @@ module.exports = {
         'wiggle': {
           '0%, 100%': { transform: 'rotate(-8deg)' },
           '50%': { transform: 'rotate(8deg)' },
+        },
+        'scroll-down': {
+          '0%': { transform: 'translateY(0)', opacity: '1' },
+          '80%, 100%': { transform: 'translateY(24px)', opacity: '0' },
         }
 
       }

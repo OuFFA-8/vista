@@ -218,10 +218,19 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }
   }
 
+  scrollToServices(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      const servicesSection = document.getElementById('services');
+      if (servicesSection) {
+        servicesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  }
+
   setActiveVideo(project: Project): void {
     this.activeVideoItem.set(project);
   }
-  
+
   openGalleryInLightbox(project: Project): void {
     this.lightboxService.open(project.media);
   }
@@ -230,7 +239,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.lightboxService.open([item]);
   }
 
-  
+
 
   scrollRight(): void { this.clientsScroller.nativeElement.scrollBy({ left: 300, behavior: 'smooth' }); }
   scrollLeft(): void { this.clientsScroller.nativeElement.scrollBy({ left: -300, behavior: 'smooth' }); }

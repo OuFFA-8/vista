@@ -20,6 +20,13 @@
         نحن نؤمن بأن كل قصة تستحق أن تروى بشكل يلهم ويبهج ويثير الفضول. دعنا نساعدك في تحقيق ذلك.
       </p>
     </div>
+
+
+    <button (click)="scrollToServices()" class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce">
+      <div class="w-8 h-14 rounded-full border-2 border-white/50 flex items-start justify-center p-1">
+        <div class="w-1 h-3 bg-white rounded-full animate-scroll-down"></div>
+      </div>
+    </button>
   </section>
 
   <!-- =============================== -->
@@ -186,7 +193,7 @@
           </a>
           } @else {
           <button dir="ltr" (click)="openGalleryInLightbox(project)"
-            class="block rounded-lg overflow-hidden aspect-square group">
+            class="block rounded-lg overflow-hidden aspect-video group">
             <div class="relative w-full h-full">
               <img [src]="project.coverImage" alt="Cover for {{ project.details?.client }}"
                 class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
