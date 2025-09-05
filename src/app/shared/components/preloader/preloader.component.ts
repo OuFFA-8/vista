@@ -13,6 +13,7 @@ import { AnimationService } from '../../../core/services/animation/animation.ser
 export class PreloaderComponent implements OnInit {
   private platformId = inject(PLATFORM_ID);
   private animationService = inject(AnimationService);
+
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
       this.runPreloaderAnimation();
@@ -20,44 +21,43 @@ export class PreloaderComponent implements OnInit {
   }
 
   private runPreloaderAnimation(): void {
-    // 1. تعريف العداد ككائن
     const counter = { value: 0 };
-    const counterElement = document.querySelector('.counter');
+
+    const counterValueElement = document.querySelector('.counter-value');
+
     const logoMask = document.querySelector('.logo-mask');
     const preloader = document.querySelector('.preloader');
 
     const tl = gsap.timeline({
-      // 3. إضافة onComplete للـ timeline
       onComplete: () => {
-        // عندما ينتهي الأنيميشن بالكامل، قم بتحديث الخدمة
         this.animationService.preloaderFinished.set(true);
       }
     });
 
-    // 3. الأنيميشن المتزامن (العداد والامتلاء)
     tl.to(counter, {
-      duration: 2.5, // مدة التحميل (بالثواني)
+      duration: 2.5,
       value: 100,
-      roundProps: 'value', // اجعل القيمة عددًا صحيحًا
+      roundProps: 'value',
       ease: 'power1.inOut',
       onUpdate: () => {
-        if (counterElement) {
-          counterElement.textContent = `${counter.value}%`;
+        // --- START: تم تعديل هذا الجزء ---
+        // تحديث نص الأرقام فقط
+        if (counterValueElement) {
+          counterValueElement.textContent = `${counter.value}`;
         }
+        // --- END: نهاية التعديل ---
       }
     })
       .to(logoMask, {
-        duration: 2.5, // نفس مدة العداد
+        duration: 2.5,
         height: 0,
         ease: 'power1.inOut'
-      }, "<"); // "<" تعني "ابدأ مع الأنيميشن السابق"
-
-    // 4. أنيميشن الخروج
-    tl.to(preloader, {
-      duration: 0.8,
-      yPercent: -100, // انزلاق للأعلى
-      ease: 'power2.in',
-      delay: 0.3 // تأخير بسيط قبل الخروج
-    });
+      }, "<")
+      .to(preloader, {
+        duration: 0.8,
+        yPercent: -100,
+        ease: 'power2.in',
+        delay: 0.3
+      });
   }
 }
